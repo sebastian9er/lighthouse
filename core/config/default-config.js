@@ -193,7 +193,10 @@ const defaultConfig = {
     'prioritize-lcp-image',
     'csp-xss',
     'has-hsts',
+<<<<<<< HEAD
     'origin-isolation',
+=======
+>>>>>>> 5fb0b760d (Adding a lighthouse audit to check for the presence of HSTS.)
     'script-treemap-data',
     'accessibility/accesskeys',
     'accessibility/aria-allowed-attr',
@@ -544,7 +547,10 @@ const defaultConfig = {
         {id: 'notification-on-start', weight: 1, group: 'best-practices-trust-safety'},
         {id: 'csp-xss', weight: 0, group: 'best-practices-trust-safety'},
         {id: 'has-hsts', weight: 0, group: 'best-practices-trust-safety'},
+<<<<<<< HEAD
         {id: 'origin-isolation', weight: 0, group: 'hidden'},
+=======
+>>>>>>> 5fb0b760d (Adding a lighthouse audit to check for the presence of HSTS.)
         // User Experience
         {id: 'paste-preventing-inputs', weight: 3, group: 'best-practices-ux'},
         {id: 'image-aspect-ratio', weight: 1, group: 'best-practices-ux'},
