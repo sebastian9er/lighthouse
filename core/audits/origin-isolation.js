@@ -39,20 +39,11 @@ import {Audit} from './audit.js';
 
 >>>>>>> 4d7aa600b (Re-format origin isolation audit and enable it in the default config.)
 const UIStrings = {
-  /**
-     Title of a Lighthouse audit that evaluates the security of a page's COOP
-     header for origin isolation. "COOP" stands for
-     "Cross-Origin-Opener-Policy".
-   */
+  /** Title of a Lighthouse audit that evaluates the security of a page's COOP      header for origin isolation. "COOP" stands for "Cross-Origin-Opener-Policy". */
   title: 'Ensure the proper usage of the COOP header to isolate the origin.',
-  /**
-     Description of a Lighthouse audit that evaluates the security of a page's
-     COOP header for origin isolation. This is displayed after a user expands
-     the section to see more. No character length limits. The last sentence
-     starting with 'Learn' becomes link text to additional documentation. "COOP"
-     stands for "Cross-Origin-Opener-Policy".
-   */
+  /** Description of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "COOP" stands for "Cross-Origin-Opener-Policy". */
   description: 'Deployment of the COOP header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. ' +
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -88,18 +79,16 @@ const UIStrings = {
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
 =======
 >>>>>>> 4d7aa600b (Re-format origin isolation audit and enable it in the default config.)
+=======
+    '[Learn what the COOP header is and how it should be deployed.](https://link-to-background)',
+  /** Summary text for the results of a Lighthouse audit that evaluates the COOP header for origin isolation. This is displayed if no COOP header is deployed. "COOP" stands for "Cross-Origin-Opener-Policy". */
+>>>>>>> 2afefff83 (Re-format COOP audit to pass some JS parsing.)
   noCoop: 'No COOP header found',
   /** Table item value calling out the presence of a syntax error. */
   invalidSyntax: 'Invalid syntax',
-  /**
-     Label for a column in a data table; entries will be a directive of the
-     COOP header. "COOP" stands for "Cross-Origin-Opener-Policy".
-   */
+  /** Label for a column in a data table; entries will be a directive of the COOP header. "COOP" stands for "Cross-Origin-Opener-Policy". */
   columnDirective: 'Directive',
-  /**
-     Label for a column in a data table; entries will be the severity of an
-     issue with the COOP header. "COOP" stands for "Cross-Origin-Opener-Policy".
-   */
+  /** Label for a column in a data table; entries will be the severity of an issue with the COOP header. "COOP" stands for "Cross-Origin-Opener-Policy". */
   columnSeverity: 'Severity',
 };
 
@@ -368,24 +357,9 @@ class OriginIsolation extends Audit {
     /** @type {LH.Audit.Details.Table['headings']} */
     const headings = [
       /* eslint-disable max-len */
-      {
-        key: 'description',
-        valueType: 'text',
-        subItemsHeading: {key: 'description'},
-        label: str_(i18n.UIStrings.columnDescription)
-      },
-      {
-        key: 'directive',
-        valueType: 'code',
-        subItemsHeading: {key: 'directive'},
-        label: str_(UIStrings.columnDirective)
-      },
-      {
-        key: 'severity',
-        valueType: 'text',
-        subItemsHeading: {key: 'severity'},
-        label: str_(UIStrings.columnSeverity)
-      },
+      { key: 'description', valueType: 'text', subItemsHeading: {key: 'description'}, label: str_(i18n.UIStrings.columnDescription)},
+      { key: 'directive', valueType: 'code', subItemsHeading: {key: 'directive'}, label: str_(UIStrings.columnDirective)},
+      { key: 'severity', valueType: 'text', subItemsHeading: {key: 'severity'}, label: str_(UIStrings.columnSeverity)},
       /* eslint-enable max-len */
     ];
     const details = Audit.makeTableDetails(headings, results);
