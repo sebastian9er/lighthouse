@@ -39,12 +39,15 @@ import oopifRequests from './test-definitions/oopif-requests.js';
 import oopifScripts from './test-definitions/oopif-scripts.js';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import originIsolationCoopHeaderMissing from './test-definitions/origin-isolation-coop-header-missing.js';
 =======
 >>>>>>> e285ac671 (Add first smokehouse test for the origin isolation / coop audit.)
 =======
 import originIsolationCoopHeaderMissing from './test-definitions/origin-isolation-coop-header-missing.js';
 >>>>>>> 5abe53686 (Add second smokehouse test for a missing coop header.)
+=======
+>>>>>>> e285ac671 (Add first smokehouse test for the origin isolation / coop audit.)
 import originIsolationCoopPresent from './test-definitions/origin-isolation-coop-present.js';
 import perfDebug from './test-definitions/perf-debug.js';
 import perfDiagnosticsAnimations from './test-definitions/perf-diagnostics-animations.js';
@@ -108,12 +111,15 @@ const smokeTests = [
   oopifScripts,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   originIsolationCoopHeaderMissing,
 =======
 >>>>>>> e285ac671 (Add first smokehouse test for the origin isolation / coop audit.)
 =======
   originIsolationCoopHeaderMissing,
 >>>>>>> 5abe53686 (Add second smokehouse test for a missing coop header.)
+=======
+>>>>>>> e285ac671 (Add first smokehouse test for the origin isolation / coop audit.)
   originIsolationCoopPresent,
   perfDebug,
   perfDiagnosticsAnimations,
