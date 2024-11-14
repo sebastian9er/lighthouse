@@ -99,8 +99,8 @@ const smokeTests = [
   metricsTrickyTtiLateFcp,
   oopifRequests,
   oopifScripts,
-  originIsolationCoopHeaderMissing,
-  originIsolationCoopPresent,
+==== BASE ====
+==== BASE ====
   perfDebug,
   perfDiagnosticsAnimations,
   perfDiagnosticsThirdParty,
