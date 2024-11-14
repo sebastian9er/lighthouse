@@ -729,6 +729,8 @@ function checkKnownFixedCollisions(strings) {
       'Back/forward cache is disabled due to a keepalive request.',
       'Consider uploading your GIF to a service which will make it available to embed as an HTML5 video.',
       'Consider uploading your GIF to a service which will make it available to embed as an HTML5 video.',
+      'Directive',
+      'Directive',
       'Document contains a $MARKDOWN_SNIPPET_0$ that triggers $MARKDOWN_SNIPPET_1$',
       'Document contains a $MARKDOWN_SNIPPET_0$ that triggers $MARKDOWN_SNIPPET_1$',
       'Document has a valid $MARKDOWN_SNIPPET_0$',
@@ -745,6 +747,8 @@ function checkKnownFixedCollisions(strings) {
       'Pages with an in-flight network request are not currently eligible for back/forward cache.',
       'Potential Savings',
       'Potential Savings',
+      'Severity',
+      'Severity',
       'The page was evicted from the cache to allow another page to be cached.',
       'The page was evicted from the cache to allow another page to be cached.',
       'Use $MARKDOWN_SNIPPET_0$ to detect unused JavaScript code. $LINK_START_0$Learn more$LINK_END_0$',
@@ -756,7 +760,7 @@ function checkKnownFixedCollisions(strings) {
       'Use the $MARKDOWN_SNIPPET_0$ component instead of $MARKDOWN_SNIPPET_1$ to automatically lazy-load images. $LINK_START_0$Learn more$LINK_END_0$.',
       'Use the $MARKDOWN_SNIPPET_0$ component instead of $MARKDOWN_SNIPPET_1$ to automatically lazy-load images. $LINK_START_0$Learn more$LINK_END_0$.',
       'Use the $MARKDOWN_SNIPPET_0$ component instead of $MARKDOWN_SNIPPET_1$ to automatically optimize image format. $LINK_START_0$Learn more$LINK_END_0$.',
-      'Use the $MARKDOWN_SNIPPET_0$ component instead of $MARKDOWN_SNIPPET_1$ to automatically optimize image format. $LINK_START_0$Learn more$LINK_END_0$.',
+      'Use the $MARKDOWN_SNIPPET_0$ component instead of $MARKDOWN_SNIPPET_1$ to automatically optimize image format. $LINK_START_0$Learn more$LINK_END_0$.'
     ]);
   } catch (err) {
     console.log('The number of duplicate strings has changed. Consider duplicating the `description` to match existing strings so they\'re translated together or update this assertion if they must absolutely be translated separately');
