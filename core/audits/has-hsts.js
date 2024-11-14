@@ -4,74 +4,35 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import {Audit} from './audit.js';
 import {MainResource} from '../computed/main-resource.js';
 import * as i18n from '../lib/i18n/i18n.js';
 
-import {Audit} from './audit.js';
-
-const UIStrings =
-    {
-      /**
-         Title of a Lighthouse audit that evaluates the security of a page's
-         HSTS header. "HSTS" stands for "HTTP Strict Transport Security".
-       */
-      title: 'Ensure the proper usage of HSTS.',
-      /**
-         Description of a Lighthouse audit that evaluates the security of a
-         page's HSTS header. This is displayed after a user expands the section
-         to see more. No character length limits. The last sentence starting
-         with 'Learn' becomes link text to additional documentation. "HSTS"
-         stands for "HTTP Strict Transport Security".
-       */
-      description: 'Deployment of the HSTS header significantly ' +
-          'reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. ' +
-          'A rollout in stages, starting with a low max-age is recommended. ' +
-          '[Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)',
-      /**
-         Summary text for the results of a Lighthouse audit that evaluates the
-         HSTS header. This is displayed if no HSTS header is deployed. "HSTS"
-         stands for "HTTP Strict Transport Security".
-       */
-      noHsts: 'No HSTS header found',
-      /**
-         Summary text for the results of a Lighthouse audit that evaluates the
-         HSTS header. This is displayed if the preload directive is missing.
-         "HSTS" stands for "HTTP Strict Transport Security".
-       */
-      noPreload: 'No preload directive found',
-      /**
-         Summary text for the results of a Lighthouse audit that evaluates the
-         HSTS header. This is displayed if the includeSubDomains directive is
-         missing. "HSTS" stands for "HTTP Strict Transport Security".
-       */
-      noSubdomain: 'No includeSubDomains directive found',
-      /**
-         Summary text for the results of a Lighthouse audit that evaluates the
-         HSTS header. This is displayed if the max-age directive is missing.
-         "HSTS" stands for "HTTP Strict Transport Security".
-       */
-      noMaxAge: 'No max-age directive',
-      /**
-         Summary text for the results of a Lighthouse audit that evaluates the
-         HSTS header. This is displayed if the provided duration for the max-age
-         directive is too low. "HSTS" stands for "HTTP Strict Transport
-         Security".
-       */
-      lowMaxAge: 'Max-age too low',
-      /** Table item value calling out the presence of a syntax error. */
-      invalidSyntax: 'Invalid syntax',
-      /**
-         Label for a column in a data table; entries will be a directive of the
-         HSTS header. "HSTS" stands for "HTTP Strict Transport Security".
-       */
-      columnDirective: 'Directive',
-      /**
-         Label for a column in a data table; entries will be the severity of an
-         issue with the HSTS header. "HSTS" stands for "HTTP Strict Transport
-         Security".
-       */
-      columnSeverity: 'Severity',
-    };
+const UIStrings = {
+  /** Title of a Lighthouse audit that evaluates the security of a page's HSTS header. "HSTS" stands for "HTTP Strict Transport Security". */
+  title: 'Ensure the proper usage of HSTS.',
+  /** Description of a Lighthouse audit that evaluates the security of a page's HSTS header. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "HSTS" stands for "HTTP Strict Transport Security". */
+  description: 'Deployment of the HSTS header significantly ' +
+    'reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. ' +
+    'A rollout in stages, starting with a low max-age is recommended. ' +
+    '[Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)',
+  /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if no HSTS header is deployed. "HSTS" stands for "HTTP Strict Transport Security". */
+  noHsts: 'No HSTS header found',
+  /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the preload directive is missing. "HSTS" stands for "HTTP Strict Transport Security". */
+  noPreload: 'No preload directive found',
+  /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the includeSubDomains directive is missing. "HSTS" stands for "HTTP Strict Transport Security". */
+  noSubdomain: 'No includeSubDomains directive found',
+  /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the max-age directive is missing. "HSTS" stands for "HTTP Strict Transport Security". */
+  noMaxAge: 'No max-age directive',
+  /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the provided duration for the max-age directive is too low. "HSTS" stands for "HTTP Strict Transport Security". */
+  lowMaxAge: 'Max-age too low',
+  /** Table item value calling out the presence of a syntax error. */
+  invalidSyntax: 'Invalid syntax',
+  /** Label for a column in a data table; entries will be a directive of the HSTS header. "HSTS" stands for "HTTP Strict Transport Security". */
+  columnDirective: 'Directive',
+  /** Label for a column in a data table; entries will be the severity of an issue with the HSTS header. "HSTS" stands for "HTTP Strict Transport Security". */
+  columnSeverity: 'Severity',
+};
 
 const str_ = i18n.createIcuMessageFn(import.meta.url, UIStrings);
 
@@ -229,24 +190,11 @@ class HasHsts extends Audit {
 
     /** @type {LH.Audit.Details.Table['headings']} */
     const headings = [
-      {
-        key: 'description',
-        valueType: 'text',
-        subItemsHeading: {key: 'description'},
-        label: str_(i18n.UIStrings.columnDescription)
-      },
-      {
-        key: 'directive',
-        valueType: 'code',
-        subItemsHeading: {key: 'directive'},
-        label: str_(UIStrings.columnDirective)
-      },
-      {
-        key: 'severity',
-        valueType: 'text',
-        subItemsHeading: {key: 'severity'},
-        label: str_(UIStrings.columnSeverity)
-      },
+      /* eslint-disable max-len */
+      { key: 'description', valueType: 'text', subItemsHeading: {key: 'description'}, label: str_(i18n.UIStrings.columnDescription)},
+      { key: 'directive', valueType: 'code', subItemsHeading: {key: 'directive'}, label: str_(UIStrings.columnDirective)},
+      { key: 'severity', valueType: 'text', subItemsHeading: {key: 'severity'}, label: str_(UIStrings.columnSeverity)},
+      /* eslint-enable max-len */
     ];
     const details = Audit.makeTableDetails(headings, results);
 
