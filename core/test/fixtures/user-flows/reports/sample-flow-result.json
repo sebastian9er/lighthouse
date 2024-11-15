@@ -2106,7 +2106,7 @@
           },
           "has-hsts": {
             "id": "has-hsts",
-            "title": "Ensure the proper usage of HSTS.",
+            "title": "Use a strong HSTS policy",
             "description": "Deployment of the HSTS header significantly reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
             "score": 1,
             "scoreDisplayMode": "informative",
@@ -9834,7 +9834,7 @@
           },
           "has-hsts": {
             "id": "has-hsts",
-            "title": "Ensure the proper usage of HSTS.",
+            "title": "Use a strong HSTS policy",
             "description": "Deployment of the HSTS header significantly reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
             "score": null,
             "scoreDisplayMode": "error",
@@ -19926,7 +19926,7 @@
           },
           "has-hsts": {
             "id": "has-hsts",
-            "title": "Ensure the proper usage of HSTS.",
+            "title": "Use a strong HSTS policy",
             "description": "Deployment of the HSTS header significantly reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
             "score": 1,
             "scoreDisplayMode": "informative",

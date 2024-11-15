@@ -1005,7 +1005,7 @@
     "message": "No includeSubDomains directive found"
   },
   "core/audits/has-hsts.js | title": {
-    "message": "Ensure the proper usage of HSTS."
+    "message": "Use a strong HSTS policy"
   },
   "core/audits/image-aspect-ratio.js | columnActual": {
     "message": "Aspect Ratio (Actual)"

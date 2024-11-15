@@ -10,7 +10,7 @@ import * as i18n from '../lib/i18n/i18n.js';
 
 const UIStrings = {
   /** Title of a Lighthouse audit that evaluates the security of a page's HSTS header. "HSTS" stands for "HTTP Strict Transport Security". */
-  title: 'Ensure the proper usage of HSTS.',
+  title: 'Use a strong HSTS policy',
   /** Description of a Lighthouse audit that evaluates the security of a page's HSTS header. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "HSTS" stands for "HTTP Strict Transport Security". */
   description: 'Deployment of the HSTS header significantly ' +
     'reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. ' +
