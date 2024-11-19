@@ -32,6 +32,7 @@ const UIStrings = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     '[Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)',
 =======
     '[Learn what the COOP header is and how it should be deployed.](https://link-to-background)',
@@ -47,6 +48,9 @@ const UIStrings = {
 >>>>>>> 4d7aa600b (Re-format origin isolation audit and enable it in the default config.)
 =======
     '[Learn what the COOP header is and how it should be deployed.](https://link-to-background)',
+=======
+    '[Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)',
+>>>>>>> 5abe53686 (Add second smokehouse test for a missing coop header.)
   /** Summary text for the results of a Lighthouse audit that evaluates the COOP header for origin isolation. This is displayed if no COOP header is deployed. "COOP" stands for "Cross-Origin-Opener-Policy". */
 >>>>>>> 2afefff83 (Re-format COOP audit to pass some JS parsing.)
   noCoop: 'No COOP header found',
