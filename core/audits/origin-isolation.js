@@ -10,7 +10,7 @@ import * as i18n from '../lib/i18n/i18n.js';
 import {Audit} from './audit.js';
 
 const UIStrings = {
-  /** Title of a Lighthouse audit that evaluates the security of a page's COOP      header for origin isolation. "COOP" stands for "Cross-Origin-Opener-Policy". */
+  /** Title of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. "COOP" stands for "Cross-Origin-Opener-Policy". */
   title: 'Ensure the proper usage of the COOP header to isolate the origin.',
   /** Description of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "COOP" stands for "Cross-Origin-Opener-Policy". */
   description: 'Deployment of the COOP header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. ' +
@@ -45,14 +45,14 @@ class OriginIsolation extends Audit {
   /**
    * @param {LH.Artifacts} artifacts
    * @param {LH.Audit.Context} context
-   * @return {Promise<{coopHeaders: string[]}>}
+   * @return {Promise<coopHeaders: string[]>}
    */
   static async getRawCoop(artifacts, context) {
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
     const mainResource =
         await MainResource.request({devtoolsLog, URL: artifacts.URL}, context);
 
-    var coopHeaders =
+    let coopHeaders =
         mainResource.responseHeaders
             .filter(h => {
               return h.name.toLowerCase() === 'cross-origin-opener-policy';
@@ -62,7 +62,7 @@ class OriginIsolation extends Audit {
     // Sanitize the header value.
     coopHeaders = coopHeaders.map(v => v.toLowerCase().replace(/\s/g, ''));
 
-    return {coopHeaders};
+    return coopHeaders;
   }
 
   /**
@@ -95,7 +95,7 @@ class OriginIsolation extends Audit {
         severity: str_(i18n.UIStrings.itemSeverityHigh),
         description: str_(UIStrings.noCoop),
         directive: undefined,
-      })
+      });
     }
 
     for (const actualDirective of coopHeaders) {
@@ -104,8 +104,8 @@ class OriginIsolation extends Audit {
         syntax.push({
           severity: str_(i18n.UIStrings.itemSeverityLow),
           description: str_(UIStrings.invalidSyntax),
-          directive: actualDirective
-        })
+          directive: actualDirective,
+        });
       }
     }
 
@@ -120,7 +120,7 @@ class OriginIsolation extends Audit {
               str_(i18n.UIStrings.itemSeverityLow))),
     ];
 
-    return {score: violations.length ? 0 : 1, results};
+    return {score: violations.length || syntax.length > 1 ? 0 : 1, results};
   }
 
   /**
@@ -129,15 +129,15 @@ class OriginIsolation extends Audit {
    * @return {Promise<LH.Audit.Product>}
    */
   static async audit(artifacts, context) {
-    const {coopHeaders} = await this.getRawCoop(artifacts, context);
+    const coopHeaders = await this.getRawCoop(artifacts, context);
     const {score, results} = this.constructResults(coopHeaders);
 
     /** @type {LH.Audit.Details.Table['headings']} */
     const headings = [
       /* eslint-disable max-len */
-      { key: 'description', valueType: 'text', subItemsHeading: {key: 'description'}, label: str_(i18n.UIStrings.columnDescription)},
-      { key: 'directive', valueType: 'code', subItemsHeading: {key: 'directive'}, label: str_(UIStrings.columnDirective)},
-      { key: 'severity', valueType: 'text', subItemsHeading: {key: 'severity'}, label: str_(UIStrings.columnSeverity)},
+      {key: 'description', valueType: 'text', subItemsHeading: {key: 'description'}, label: str_(i18n.UIStrings.columnDescription)},
+      {key: 'directive', valueType: 'code', subItemsHeading: {key: 'directive'}, label: str_(UIStrings.columnDirective)},
+      {key: 'severity', valueType: 'text', subItemsHeading: {key: 'severity'}, label: str_(UIStrings.columnSeverity)},
       /* eslint-enable max-len */
     ];
     const details = Audit.makeTableDetails(headings, results);
