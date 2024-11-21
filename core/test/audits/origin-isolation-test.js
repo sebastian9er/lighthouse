@@ -26,11 +26,16 @@ it('marked N/A if no violations found', async () => {
     },
   };
 <<<<<<< HEAD
+<<<<<<< HEAD
   const results =
       await OriginIsolation.audit(artifacts, {computedCache: new Map()});
 =======
   const results = await OriginIsolation.audit(artifacts, {computedCache: new Map()});
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+  const results =
+      await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
   expect(results.details.items).toHaveLength(0);
   expect(results.notApplicable).toBeTruthy();
 });
@@ -55,6 +60,7 @@ it('No COOP header found', async () => {
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const results =
       await OriginIsolation.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
@@ -65,9 +71,17 @@ it('No COOP header found', async () => {
     {
 =======
   const results = await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+=======
+  const results =
+      await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('High');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No COOP header found');
   expect(results.details.items).toMatchObject([
     {
+<<<<<<< HEAD
       severity: {
         i18nId: "core/lib/i18n/i18n.js | itemSeverityHigh",
         values: undefined,
@@ -79,6 +93,8 @@ it('No COOP header found', async () => {
         formattedDefault: 'No COOP header found'
       },
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
       directive: undefined,
     },
   ]);
@@ -104,6 +120,7 @@ it('Messed up directive.', async () => {
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const results =
       await OriginIsolation.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
@@ -115,9 +132,17 @@ it('Messed up directive.', async () => {
       directive: 'foodirective',
 =======
   const results = await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+=======
+  const results =
+      await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('Low');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('Invalid syntax');
   expect(results.details.items).toMatchObject([
     {
+<<<<<<< HEAD
       severity: {
         i18nId: "core/lib/i18n/i18n.js | itemSeverityLow",
         values: undefined,
@@ -130,6 +155,9 @@ it('Messed up directive.', async () => {
       },
       directive: "foodirective",
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+      directive: 'foodirective',
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
     },
   ]);
 });
@@ -157,10 +185,14 @@ describe('getRawCoop', () => {
       },
     };
 <<<<<<< HEAD
+<<<<<<< HEAD
     const coopHeaders =
 =======
     const {coopHeaders} =
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+    const coopHeaders =
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
       await OriginIsolation.getRawCoop(artifacts, {computedCache: new Map()});
     expect(coopHeaders).toEqual([
       `same-origin`,
@@ -189,10 +221,14 @@ describe('getRawCoop', () => {
       },
     };
 <<<<<<< HEAD
+<<<<<<< HEAD
     const coopHeaders =
 =======
     const {coopHeaders} =
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+    const coopHeaders =
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
       await OriginIsolation.getRawCoop(artifacts, {computedCache: new Map()});
     expect(coopHeaders).toEqual([
       ``,
@@ -221,10 +257,14 @@ describe('getRawCoop', () => {
       },
     };
 <<<<<<< HEAD
+<<<<<<< HEAD
     const coopHeaders =
 =======
     const {coopHeaders} =
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+    const coopHeaders =
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
       await OriginIsolation.getRawCoop(artifacts, {computedCache: new Map()});
     expect(coopHeaders).toEqual([
       ``,
@@ -235,15 +275,20 @@ describe('getRawCoop', () => {
 describe('constructResults', () => {
   it('passes with no findings', () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const {score, results} = OriginIsolation.constructResults(['same-origin']);
 =======
     const {score, results} = OriginIsolation.constructResults([ 'same-origin' ]);
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+    const {score, results} = OriginIsolation.constructResults(['same-origin']);
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
     expect(score).toEqual(1);
     expect(results).toEqual([]);
   });
 
   it('constructs result based on misconfigured COOP header', () => {
+<<<<<<< HEAD
 <<<<<<< HEAD
     const {score, results} =
         OriginIsolation.constructResults(['foo-directive']);
@@ -256,21 +301,26 @@ describe('constructResults', () => {
         directive: 'foo-directive',
 =======
     const {score, results} = OriginIsolation.constructResults([ 'foo-directive' ]);
+=======
+    const {score, results} =
+        OriginIsolation.constructResults(['foo-directive']);
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
     expect(score).toEqual(1);
+    expect(results[0].severity).toBeDisplayString('Low');
+    expect(results[0].description)
+        .toBeDisplayString('Invalid syntax');
     expect(results).toMatchObject([
       {
-        description: {
-          formattedDefault: 'Invalid syntax',
-          i18nId: 'core/audits/origin-isolation.js | invalidSyntax',
-          values: undefined,
-        },
         directive: 'foo-directive',
+<<<<<<< HEAD
         severity: {
           formattedDefault: 'Low',
           i18nId: 'core/lib/i18n/i18n.js | itemSeverityLow',
           values: undefined,
         },
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
       },
     ]);
   });
@@ -279,6 +329,7 @@ describe('constructResults', () => {
     const {score, results} = OriginIsolation.constructResults([]);
     expect(score).toEqual(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
         .toBeDisplayString('No COOP header found');
@@ -286,14 +337,15 @@ describe('constructResults', () => {
       {
         directive: undefined,
 =======
+=======
+    expect(results[0].severity).toBeDisplayString('High');
+    expect(results[0].description)
+        .toBeDisplayString('No COOP header found');
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
     expect(results).toMatchObject([
       {
-        description: {
-          formattedDefault: 'No COOP header found',
-          i18nId: 'core/audits/origin-isolation.js | noCoop',
-          values: undefined,
-        },
         directive: undefined,
+<<<<<<< HEAD
         severity: {
           formattedDefault: 'High',
           i18nId: 'core/lib/i18n/i18n.js | itemSeverityHigh',
@@ -301,6 +353,8 @@ describe('constructResults', () => {
         },
 
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
       },
     ]);
   });
