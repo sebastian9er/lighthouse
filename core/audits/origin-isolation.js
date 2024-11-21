@@ -39,7 +39,7 @@ import {Audit} from './audit.js';
 
 >>>>>>> 4d7aa600b (Re-format origin isolation audit and enable it in the default config.)
 const UIStrings = {
-  /** Title of a Lighthouse audit that evaluates the security of a page's COOP      header for origin isolation. "COOP" stands for "Cross-Origin-Opener-Policy". */
+  /** Title of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. "COOP" stands for "Cross-Origin-Opener-Policy". */
   title: 'Ensure the proper usage of the COOP header to isolate the origin.',
   /** Description of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "COOP" stands for "Cross-Origin-Opener-Policy". */
   description: 'Deployment of the COOP header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. ' +
@@ -119,6 +119,7 @@ class OriginIsolation extends Audit {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
    * @return {Promise<coopHeaders: string[]>}
    */
   static async getRawCoop(artifacts, context) {
@@ -166,13 +167,16 @@ class OriginIsolation extends Audit {
 >>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
 =======
    * @return {Promise<{coopHeaders: string[]}>}
+=======
+   * @return {Promise<coopHeaders: string[]>}
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
    */
   static async getRawCoop(artifacts, context) {
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
     const mainResource =
         await MainResource.request({devtoolsLog, URL: artifacts.URL}, context);
 
-    var coopHeaders =
+    let coopHeaders =
         mainResource.responseHeaders
             .filter(h => {
               return h.name.toLowerCase() === 'cross-origin-opener-policy';
@@ -182,8 +186,12 @@ class OriginIsolation extends Audit {
     // Sanitize the header value.
     coopHeaders = coopHeaders.map(v => v.toLowerCase().replace(/\s/g, ''));
 
+<<<<<<< HEAD
     return {coopHeaders};
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+    return coopHeaders;
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
   }
 
   /**
@@ -237,6 +245,7 @@ class OriginIsolation extends Audit {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       });
 =======
       })
@@ -247,6 +256,9 @@ class OriginIsolation extends Audit {
 =======
       })
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+      });
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
     }
 
     for (const actualDirective of coopHeaders) {
@@ -261,6 +273,7 @@ class OriginIsolation extends Audit {
           description: str_(UIStrings.invalidSyntax),
           directive: actualDirective,
         });
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
       if(!allowedDirectives.includes(actualDirective)){
@@ -284,6 +297,8 @@ class OriginIsolation extends Audit {
 >>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
 =======
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
       }
     }
 
@@ -325,6 +340,7 @@ class OriginIsolation extends Audit {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     return {score: violations.length || syntax.length > 1 ? 0 : 1, results};
 =======
     return {score: violations.length ? 0 : 1, results};
@@ -335,6 +351,9 @@ class OriginIsolation extends Audit {
 =======
     return {score: violations.length ? 0 : 1, results};
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+    return {score: violations.length || syntax.length > 1 ? 0 : 1, results};
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
   }
 
   /**
@@ -346,6 +365,7 @@ class OriginIsolation extends Audit {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     const coopHeaders = await this.getRawCoop(artifacts, context);
 =======
     const {coopHeaders} = await this.getRawCoop(artifacts, context);
@@ -356,14 +376,17 @@ class OriginIsolation extends Audit {
 =======
     const {coopHeaders} = await this.getRawCoop(artifacts, context);
 >>>>>>> 287296188 (Add Lighthouse audit to check for presence of the COOP header (origin isolation).)
+=======
+    const coopHeaders = await this.getRawCoop(artifacts, context);
+>>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
     const {score, results} = this.constructResults(coopHeaders);
 
     /** @type {LH.Audit.Details.Table['headings']} */
     const headings = [
       /* eslint-disable max-len */
-      { key: 'description', valueType: 'text', subItemsHeading: {key: 'description'}, label: str_(i18n.UIStrings.columnDescription)},
-      { key: 'directive', valueType: 'code', subItemsHeading: {key: 'directive'}, label: str_(UIStrings.columnDirective)},
-      { key: 'severity', valueType: 'text', subItemsHeading: {key: 'severity'}, label: str_(UIStrings.columnSeverity)},
+      {key: 'description', valueType: 'text', subItemsHeading: {key: 'description'}, label: str_(i18n.UIStrings.columnDescription)},
+      {key: 'directive', valueType: 'code', subItemsHeading: {key: 'directive'}, label: str_(UIStrings.columnDirective)},
+      {key: 'severity', valueType: 'text', subItemsHeading: {key: 'severity'}, label: str_(UIStrings.columnSeverity)},
       /* eslint-enable max-len */
     ];
     const details = Audit.makeTableDetails(headings, results);
