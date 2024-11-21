@@ -25,7 +25,8 @@ it('marked N/A if no violations found', async () => {
       ]),
     },
   };
-  const results = await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+  const results =
+      await OriginIsolation.audit(artifacts, {computedCache: new Map()});
   expect(results.details.items).toHaveLength(0);
   expect(results.notApplicable).toBeTruthy();
 });
@@ -49,20 +50,14 @@ it('No COOP header found', async () => {
     },
   };
 
-  const results = await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+  const results =
+      await OriginIsolation.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('High');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No COOP header found');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityHigh",
-        values: undefined,
-        formattedDefault: 'High'
-      },
-      description: {
-        i18nId: "core/audits/origin-isolation.js | noCoop",
-        values: undefined,
-        formattedDefault: 'No COOP header found'
-      },
       directive: undefined,
     },
   ]);
@@ -87,21 +82,15 @@ it('Messed up directive.', async () => {
     },
   };
 
-  const results = await OriginIsolation.audit(artifacts, {computedCache: new Map()});
+  const results =
+      await OriginIsolation.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('Low');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('Invalid syntax');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityLow",
-        values: undefined,
-        formattedDefault: 'Low'
-      },
-      description: {
-        i18nId: "core/audits/origin-isolation.js | invalidSyntax",
-        values: undefined,
-        formattedDefault: 'Invalid syntax'
-      },
-      directive: "foodirective",
+      directive: 'foodirective',
     },
   ]);
 });
@@ -128,7 +117,7 @@ describe('getRawCoop', () => {
         ]),
       },
     };
-    const {coopHeaders} =
+    const coopHeaders =
       await OriginIsolation.getRawCoop(artifacts, {computedCache: new Map()});
     expect(coopHeaders).toEqual([
       `same-origin`,
@@ -156,7 +145,7 @@ describe('getRawCoop', () => {
         ]),
       },
     };
-    const {coopHeaders} =
+    const coopHeaders =
       await OriginIsolation.getRawCoop(artifacts, {computedCache: new Map()});
     expect(coopHeaders).toEqual([
       ``,
@@ -184,7 +173,7 @@ describe('getRawCoop', () => {
         ]),
       },
     };
-    const {coopHeaders} =
+    const coopHeaders =
       await OriginIsolation.getRawCoop(artifacts, {computedCache: new Map()});
     expect(coopHeaders).toEqual([
       ``,
@@ -194,27 +183,21 @@ describe('getRawCoop', () => {
 
 describe('constructResults', () => {
   it('passes with no findings', () => {
-    const {score, results} = OriginIsolation.constructResults([ 'same-origin' ]);
+    const {score, results} = OriginIsolation.constructResults(['same-origin']);
     expect(score).toEqual(1);
     expect(results).toEqual([]);
   });
 
   it('constructs result based on misconfigured COOP header', () => {
-    const {score, results} = OriginIsolation.constructResults([ 'foo-directive' ]);
+    const {score, results} =
+        OriginIsolation.constructResults(['foo-directive']);
     expect(score).toEqual(1);
+    expect(results[0].severity).toBeDisplayString('Low');
+    expect(results[0].description)
+        .toBeDisplayString('Invalid syntax');
     expect(results).toMatchObject([
       {
-        description: {
-          formattedDefault: 'Invalid syntax',
-          i18nId: 'core/audits/origin-isolation.js | invalidSyntax',
-          values: undefined,
-        },
         directive: 'foo-directive',
-        severity: {
-          formattedDefault: 'Low',
-          i18nId: 'core/lib/i18n/i18n.js | itemSeverityLow',
-          values: undefined,
-        },
       },
     ]);
   });
@@ -222,20 +205,12 @@ describe('constructResults', () => {
   it('returns single item for no COOP', () => {
     const {score, results} = OriginIsolation.constructResults([]);
     expect(score).toEqual(0);
+    expect(results[0].severity).toBeDisplayString('High');
+    expect(results[0].description)
+        .toBeDisplayString('No COOP header found');
     expect(results).toMatchObject([
       {
-        description: {
-          formattedDefault: 'No COOP header found',
-          i18nId: 'core/audits/origin-isolation.js | noCoop',
-          values: undefined,
-        },
         directive: undefined,
-        severity: {
-          formattedDefault: 'High',
-          i18nId: 'core/lib/i18n/i18n.js | itemSeverityHigh',
-          values: undefined,
-        },
-
       },
     ]);
   });
