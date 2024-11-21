@@ -19,7 +19,10 @@ it('marked N/A if no violations found', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Strict-Transport-Security', value: `max-age=63072000; includeSubDomains; preload`},
+            {
+              name: 'Strict-Transport-Security',
+              value: `max-age=63072000; includeSubDomains; preload`,
+            },
           ],
         },
       ]),
@@ -37,7 +40,10 @@ it('max-age missing, but other directives present', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Strict-Transport-Security', value: `includeSubDomains; preload`},
+            {
+              name: 'Strict-Transport-Security',
+              value: `includeSubDomains; preload`,
+            },
           ],
         },
       ]),
@@ -54,14 +60,14 @@ it('max-age missing, but other directives present', async () => {
   expect(results.details.items).toMatchObject([
     {
       severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityHigh",
+        i18nId: 'core/lib/i18n/i18n.js | itemSeverityHigh',
         values: undefined,
-        formattedDefault: 'High'
+        formattedDefault: 'High',
       },
       description: {
-        i18nId: "core/audits/has-hsts.js | noMaxAge",
+        i18nId: 'core/audits/has-hsts.js | noMaxAge',
         values: undefined,
-        formattedDefault: 'No max-age directive'
+        formattedDefault: 'No max-age directive',
       },
       directive: 'max-age',
     },
@@ -75,7 +81,10 @@ it('max-age too low, but other directives present', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Strict-Transport-Security', value: `max-age=1337; includeSubDomains; preload`},
+            {
+              name: 'Strict-Transport-Security',
+              value: `max-age=1337; includeSubDomains; preload`,
+            },
           ],
         },
       ]),
@@ -92,14 +101,14 @@ it('max-age too low, but other directives present', async () => {
   expect(results.details.items).toMatchObject([
     {
       severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityHigh",
+        i18nId: 'core/lib/i18n/i18n.js | itemSeverityHigh',
         values: undefined,
-        formattedDefault: 'High'
+        formattedDefault: 'High',
       },
       description: {
-        i18nId: "core/audits/has-hsts.js | lowMaxAge",
+        i18nId: 'core/audits/has-hsts.js | lowMaxAge',
         values: undefined,
-        formattedDefault: 'Max-age too low'
+        formattedDefault: 'Max-age too low',
       },
       directive: 'max-age',
     },
@@ -113,7 +122,10 @@ it('includeSubDomains missing, but other directives present', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Strict-Transport-Security', value: `max-age=63072000; preload`},
+            {
+              name: 'Strict-Transport-Security',
+              value: `max-age=63072000; preload`,
+            },
           ],
         },
       ]),
@@ -127,18 +139,11 @@ it('includeSubDomains missing, but other directives present', async () => {
 
   const results = await HasHsts.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('Medium');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No includeSubDomains directive found');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityMedium",
-        values: undefined,
-        formattedDefault: 'Medium'
-      },
-      description: {
-        i18nId: "core/audits/has-hsts.js | noSubdomain",
-        values: undefined,
-        formattedDefault: 'No includeSubDomains directive found'
-      },
       directive: 'includeSubDomains',
     },
   ]);
@@ -151,7 +156,10 @@ it('preload missing, but other directives present', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Strict-Transport-Security', value: `max-age=63072000; includeSubDomains`},
+            {
+              name: 'Strict-Transport-Security',
+              value: `max-age=63072000; includeSubDomains`,
+            },
           ],
         },
       ]),
@@ -165,18 +173,11 @@ it('preload missing, but other directives present', async () => {
 
   const results = await HasHsts.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('Medium');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No preload directive found');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityMedium",
-        values: undefined,
-        formattedDefault: 'Medium'
-      },
-      description: {
-        i18nId: "core/audits/has-hsts.js | noPreload",
-        values: undefined,
-        formattedDefault: 'No preload directive found'
-      },
       directive: 'preload',
     },
   ]);
@@ -189,7 +190,10 @@ it('No HSTS header found', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Foo-Header', value: `max-age=63072000; includeSubDomains; preload`},
+            {
+              name: 'Foo-Header',
+              value: `max-age=63072000; includeSubDomains; preload`,
+            },
           ],
         },
       ]),
@@ -203,18 +207,11 @@ it('No HSTS header found', async () => {
 
   const results = await HasHsts.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('High');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No HSTS header found');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityHigh",
-        values: undefined,
-        formattedDefault: 'High'
-      },
-      description: {
-        i18nId: "core/audits/has-hsts.js | noHsts",
-        values: undefined,
-        formattedDefault: 'No HSTS header found'
-      },
       directive: undefined,
     },
   ]);
@@ -227,7 +224,11 @@ it('Messed up directive, but other actual HSTS directives present.', async () =>
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Strict-Transport-Security', value: `max-age=63072000; fooDirective; includeSubDomains; preload`},
+            {
+              name: 'Strict-Transport-Security',
+              value:
+                  `max-age=63072000; fooDirective; includeSubDomains; preload`,
+            },
           ],
         },
       ]),
@@ -241,19 +242,12 @@ it('Messed up directive, but other actual HSTS directives present.', async () =>
 
   const results = await HasHsts.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('Low');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('Invalid syntax');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityLow",
-        values: undefined,
-        formattedDefault: 'Low'
-      },
-      description: {
-        i18nId: "core/audits/has-hsts.js | invalidSyntax",
-        values: undefined,
-        formattedDefault: 'Invalid syntax'
-      },
-      directive: "foodirective",
+      directive: 'foodirective',
     },
   ]);
 });
@@ -265,7 +259,10 @@ it('Messed up directive and one more directive missing.', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-            {name: 'Strict-Transport-Security', value: `max-age=63072000; fooDirective; preload`},
+            {
+              name: 'Strict-Transport-Security',
+              value: `max-age=63072000; fooDirective; preload`,
+            },
           ],
         },
       ]),
@@ -279,32 +276,18 @@ it('Messed up directive and one more directive missing.', async () => {
 
   const results = await HasHsts.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('Medium');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No includeSubDomains directive found');
+  expect(results.details.items[1].severity).toBeDisplayString('Low');
+  expect(results.details.items[1].description)
+      .toBeDisplayString('Invalid syntax');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityMedium",
-        values: undefined,
-        formattedDefault: 'Medium'
-      },
-      description: {
-        i18nId: "core/audits/has-hsts.js | noSubdomain",
-        values: undefined,
-        formattedDefault: 'No includeSubDomains directive found'
-      },
-      directive: "includeSubDomains",
+      directive: 'includeSubDomains',
     },
     {
-      severity: {
-        i18nId: "core/lib/i18n/i18n.js | itemSeverityLow",
-        values: undefined,
-        formattedDefault: 'Low'
-      },
-      description: {
-        i18nId: "core/audits/has-hsts.js | invalidSyntax",
-        values: undefined,
-        formattedDefault: 'Invalid syntax'
-      },
-      directive: "foodirective",
+      directive: 'foodirective',
     },
   ]);
 });
@@ -331,7 +314,7 @@ describe('getRawHsts', () => {
         ]),
       },
     };
-    const {hstsHeaders} =
+    const hstsHeaders =
       await HasHsts.getRawHsts(artifacts, {computedCache: new Map()});
     expect(hstsHeaders).toEqual([
       `max-age=63072000`,
@@ -361,7 +344,7 @@ describe('getRawHsts', () => {
         ]),
       },
     };
-    const {hstsHeaders} =
+    const hstsHeaders =
       await HasHsts.getRawHsts(artifacts, {computedCache: new Map()});
     expect(hstsHeaders).toEqual([
       ``,
@@ -389,7 +372,7 @@ describe('getRawHsts', () => {
         ]),
       },
     };
-    const {hstsHeaders} =
+    const hstsHeaders =
       await HasHsts.getRawHsts(artifacts, {computedCache: new Map()});
     expect(hstsHeaders).toEqual([
       ``,
@@ -399,27 +382,21 @@ describe('getRawHsts', () => {
 
 describe('constructResults', () => {
   it('passes with no findings', () => {
-    const {score, results} = HasHsts.constructResults([ 'max-age=31536000', 'includesubdomains', 'preload' ]);
+    const {score, results} = HasHsts.constructResults(
+        ['max-age=31536000', 'includesubdomains', 'preload']);
     expect(score).toEqual(1);
     expect(results).toEqual([]);
   });
 
   it('constructs result based on misconfigured HSTS header', () => {
-    const {score, results} = HasHsts.constructResults([ 'max-age=31536000', 'foo-directive', 'includesubdomains', 'preload' ]);
+    const {score, results} = HasHsts.constructResults(
+        ['max-age=31536000', 'foo-directive', 'includesubdomains', 'preload']);
     expect(score).toEqual(1);
+    expect(results[0].severity).toBeDisplayString('Low');
+    expect(results[0].description).toBeDisplayString('Invalid syntax');
     expect(results).toMatchObject([
       {
-        description: {
-          formattedDefault: 'Invalid syntax',
-          i18nId: 'core/audits/has-hsts.js | invalidSyntax',
-          values: undefined,
-        },
         directive: 'foo-directive',
-        severity: {
-          formattedDefault: 'Low',
-          i18nId: 'core/lib/i18n/i18n.js | itemSeverityLow',
-          values: undefined,
-        },
       },
     ]);
   });
@@ -427,20 +404,11 @@ describe('constructResults', () => {
   it('returns single item for no HSTS', () => {
     const {score, results} = HasHsts.constructResults([]);
     expect(score).toEqual(0);
+    expect(results[0].severity).toBeDisplayString('High');
+    expect(results[0].description).toBeDisplayString('No HSTS header found');
     expect(results).toMatchObject([
       {
-        description: {
-          formattedDefault: 'No HSTS header found',
-          i18nId: 'core/audits/has-hsts.js | noHsts',
-          values: undefined,
-        },
         directive: undefined,
-        severity: {
-          formattedDefault: 'High',
-          i18nId: 'core/lib/i18n/i18n.js | itemSeverityHigh',
-          values: undefined,
-        },
-
       },
     ]);
   });
