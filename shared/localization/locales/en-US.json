@@ -990,7 +990,7 @@
     "message": "Invalid syntax"
   },
   "core/audits/has-hsts.js | lowMaxAge": {
-    "message": "Max-age too low"
+    "message": "max-age is too low"
   },
   "core/audits/has-hsts.js | noHsts": {
     "message": "No HSTS header found"

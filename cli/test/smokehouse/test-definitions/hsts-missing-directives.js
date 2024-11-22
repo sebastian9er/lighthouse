@@ -15,6 +15,20 @@ const expectations = {
     audits: {
       'has-hsts': {
         score: 1,
+        details: {
+          items: [
+            {
+              directive: 'includeSubDomains',
+              description: 'No includeSubDomains directive found',
+              severity: 'Medium',
+            },
+            {
+              directive: 'preload',
+              description: 'No preload directive found',
+              severity: 'Medium',
+            }
+          ]
+        }
       },
     },
   },

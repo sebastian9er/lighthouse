@@ -25,7 +25,7 @@ const UIStrings = {
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the max-age directive is missing. "HSTS" stands for "HTTP Strict Transport Security". */
   noMaxAge: 'No max-age directive',
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the provided duration for the max-age directive is too low. "HSTS" stands for "HTTP Strict Transport Security". */
-  lowMaxAge: 'Max-age too low',
+  lowMaxAge: 'max-age is too low',
   /** Table item value calling out the presence of a syntax error. */
   invalidSyntax: 'Invalid syntax',
   /** Label for a column in a data table; entries will be a directive of the HSTS header. "HSTS" stands for "HTTP Strict Transport Security". */
@@ -149,11 +149,8 @@ class HasHsts extends Audit {
       }
 
       // If there is a directive that's not an official HSTS directive.
-      if (!allowedDirectives.includes(actualDirective)) {
-        // max-age=<number> would always trigger.
-        if (actualDirective.includes('max-age')) {
-          continue;
-        }
+      if (!allowedDirectives.includes(actualDirective) &&
+          !actualDirective.includes('max-age')) {
         syntax.push({
           severity: str_(i18n.UIStrings.itemSeverityLow),
           description: str_(UIStrings.invalidSyntax),
@@ -176,7 +173,7 @@ class HasHsts extends Audit {
               f.directive, f.description,
               str_(i18n.UIStrings.itemSeverityLow))),
     ];
-    return {score: violations.length || syntax.length > 1 ? 0 : 1, results};
+    return {score: violations.length || syntax.length ? 0 : 1, results};
   }
 
   /**

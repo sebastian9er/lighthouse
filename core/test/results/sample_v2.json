@@ -6753,8 +6753,7 @@
         },
         {
           "id": "has-hsts",
-          "weight": 0,
-          "group": "best-practices-trust-safety"
+          "weight": 0
         },
         {
           "id": "paste-preventing-inputs",

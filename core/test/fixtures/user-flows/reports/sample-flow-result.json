@@ -4623,8 +4623,7 @@
               },
               {
                 "id": "has-hsts",
-                "weight": 0,
-                "group": "best-practices-trust-safety"
+                "weight": 0
               },
               {
                 "id": "paste-preventing-inputs",
@@ -10907,8 +10906,7 @@
               },
               {
                 "id": "has-hsts",
-                "weight": 0,
-                "group": "best-practices-trust-safety"
+                "weight": 0
               },
               {
                 "id": "image-aspect-ratio",
@@ -22596,8 +22594,7 @@
               },
               {
                 "id": "has-hsts",
-                "weight": 0,
-                "group": "best-practices-trust-safety"
+                "weight": 0
               },
               {
                 "id": "paste-preventing-inputs",

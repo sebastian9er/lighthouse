@@ -990,7 +990,7 @@
     "message": "Îńv̂ál̂íd̂ śŷńt̂áx̂"
   },
   "core/audits/has-hsts.js | lowMaxAge": {
-    "message": "M̂áx̂-áĝé t̂óô ĺôẃ"
+    "message": "m̂áx̂-áĝé îś t̂óô ĺôẃ"
   },
   "core/audits/has-hsts.js | noHsts": {
     "message": "N̂ó ĤŚT̂Ś ĥéâd́êŕ f̂óûńd̂"

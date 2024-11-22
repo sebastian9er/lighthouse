@@ -57,18 +57,11 @@ it('max-age missing, but other directives present', async () => {
 
   const results = await HasHsts.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('High');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No max-age directive');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: 'core/lib/i18n/i18n.js | itemSeverityHigh',
-        values: undefined,
-        formattedDefault: 'High',
-      },
-      description: {
-        i18nId: 'core/audits/has-hsts.js | noMaxAge',
-        values: undefined,
-        formattedDefault: 'No max-age directive',
-      },
       directive: 'max-age',
     },
   ]);
@@ -98,18 +91,11 @@ it('max-age too low, but other directives present', async () => {
 
   const results = await HasHsts.audit(artifacts, {computedCache: new Map()});
   expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('High');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('max-age is too low');
   expect(results.details.items).toMatchObject([
     {
-      severity: {
-        i18nId: 'core/lib/i18n/i18n.js | itemSeverityHigh',
-        values: undefined,
-        formattedDefault: 'High',
-      },
-      description: {
-        i18nId: 'core/audits/has-hsts.js | lowMaxAge',
-        values: undefined,
-        formattedDefault: 'Max-age too low',
-      },
       directive: 'max-age',
     },
   ]);
@@ -391,7 +377,7 @@ describe('constructResults', () => {
   it('constructs result based on misconfigured HSTS header', () => {
     const {score, results} = HasHsts.constructResults(
         ['max-age=31536000', 'foo-directive', 'includesubdomains', 'preload']);
-    expect(score).toEqual(1);
+    expect(score).toEqual(0);
     expect(results[0].severity).toBeDisplayString('Low');
     expect(results[0].description).toBeDisplayString('Invalid syntax');
     expect(results).toMatchObject([
