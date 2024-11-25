@@ -23,7 +23,7 @@ const UIStrings = {
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the includeSubDomains directive is missing. "HSTS" stands for "HTTP Strict Transport Security". */
   noSubdomain: 'No `includeSubDomains` directive found',
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the max-age directive is missing. "HSTS" stands for "HTTP Strict Transport Security". */
-  noMaxAge: 'No max-age directive',
+  noMaxAge: 'No `max-age` directive',
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the provided duration for the max-age directive is too low. "HSTS" stands for "HTTP Strict Transport Security". */
   lowMaxAge: 'max-age is too low',
   /** Table item value calling out the presence of a syntax error. */
