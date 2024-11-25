@@ -13,7 +13,7 @@ const UIStrings = {
   title: 'Use a strong HSTS policy',
   /** Description of a Lighthouse audit that evaluates the security of a page's HSTS header. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "HSTS" stands for "HTTP Strict Transport Security". */
   description: 'Deployment of the HSTS header significantly ' +
-    'reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. ' +
+    'reduces the risk of downgrading HTTP connections and eavesdropping attacks. ' +
     'A rollout in stages, starting with a low max-age is recommended. ' +
     '[Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)',
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if no HSTS header is deployed. "HSTS" stands for "HTTP Strict Transport Security". */
