@@ -741,6 +741,8 @@ function checkKnownFixedCollisions(strings) {
       'Lighthouse was unable to reliably load the page you requested. Make sure you are testing the correct URL and that the server is properly responding to all requests. (Status code: $ICU_0$)',
       'Name',
       'Name',
+      'No $MARKDOWN_SNIPPET_0$ directive found',
+      'No $MARKDOWN_SNIPPET_0$ directive found',
       'Pages that use portals are not currently eligible for back/forward cache.',
       'Pages that use portals are not currently eligible for back/forward cache.',
       'Pages with an in-flight network request are not currently eligible for back/forward cache.',

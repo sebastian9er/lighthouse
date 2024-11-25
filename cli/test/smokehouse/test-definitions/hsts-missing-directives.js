@@ -19,16 +19,16 @@ const expectations = {
           items: [
             {
               directive: 'includeSubDomains',
-              description: 'No includeSubDomains directive found',
+              description: 'No `includeSubDomains` directive found',
               severity: 'Medium',
             },
             {
               directive: 'preload',
-              description: 'No preload directive found',
+              description: 'No `preload` directive found',
               severity: 'Medium',
-            }
-          ]
-        }
+            },
+          ],
+        },
       },
     },
   },

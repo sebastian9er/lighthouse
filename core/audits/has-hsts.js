@@ -55,7 +55,7 @@ class HasHsts extends Audit {
   /**
    * @param {LH.Artifacts} artifacts
    * @param {LH.Audit.Context} context
-   * @return {Promise<hstsHeaders: string[]>}
+   * @return {Promise<string[]>}
    */
   static async getRawHsts(artifacts, context) {
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
@@ -120,7 +120,7 @@ class HasHsts extends Audit {
       });
     }
 
-    if (!hstsHeaders.toString().includes('includesubdomains')){
+    if (!hstsHeaders.toString().includes('includesubdomains')) {
       // No includeSubdomains might be even wanted. But would be preferred.
       warnings.push({
         severity: str_(i18n.UIStrings.itemSeverityMedium),

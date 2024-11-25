@@ -984,25 +984,25 @@
     "message": "Severity"
   },
   "core/audits/has-hsts.js | description": {
-    "message": "Deployment of the HSTS header significantly reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)"
+    "message": "Deployment of the HSTS header significantly reduces the risk of downgrading HTTP connections and eavesdropping attacks. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)"
   },
   "core/audits/has-hsts.js | invalidSyntax": {
     "message": "Invalid syntax"
   },
   "core/audits/has-hsts.js | lowMaxAge": {
-    "message": "max-age is too low"
+    "message": "`max-age` is too low"
   },
   "core/audits/has-hsts.js | noHsts": {
     "message": "No HSTS header found"
   },
   "core/audits/has-hsts.js | noMaxAge": {
-    "message": "No max-age directive"
+    "message": "No `max-age` directive"
   },
   "core/audits/has-hsts.js | noPreload": {
-    "message": "No preload directive found"
+    "message": "No `preload` directive found"
   },
   "core/audits/has-hsts.js | noSubdomain": {
-    "message": "No includeSubDomains directive found"
+    "message": "No `includeSubDomains` directive found"
   },
   "core/audits/has-hsts.js | title": {
     "message": "Use a strong HSTS policy"

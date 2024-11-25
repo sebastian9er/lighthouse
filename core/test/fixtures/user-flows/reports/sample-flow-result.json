@@ -2107,7 +2107,7 @@
           "has-hsts": {
             "id": "has-hsts",
             "title": "Use a strong HSTS policy",
-            "description": "Deployment of the HSTS header significantly reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
+            "description": "Deployment of the HSTS header significantly reduces the risk of downgrading HTTP connections and eavesdropping attacks. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -2141,12 +2141,12 @@
               "items": [
                 {
                   "directive": "includeSubDomains",
-                  "description": "No includeSubDomains directive found",
+                  "description": "No `includeSubDomains` directive found",
                   "severity": "Medium"
                 },
                 {
                   "directive": "preload",
-                  "description": "No preload directive found",
+                  "description": "No `preload` directive found",
                   "severity": "Medium"
                 }
               ]
@@ -4623,7 +4623,8 @@
               },
               {
                 "id": "has-hsts",
-                "weight": 0
+                "weight": 0,
+                "group": "hidden"
               },
               {
                 "id": "paste-preventing-inputs",
@@ -9831,15 +9832,6 @@
               "items": []
             }
           },
-          "has-hsts": {
-            "id": "has-hsts",
-            "title": "Use a strong HSTS policy",
-            "description": "Deployment of the HSTS header significantly reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
-            "score": null,
-            "scoreDisplayMode": "error",
-            "errorMessage": "mainDocumentUrl must exist to get the main resource",
-            "errorStack": "Error: mainDocumentUrl must exist to get the main resource\n    at MainResource.compute_ (file:///core/computed/main-resource.js)\n    at MainResource.request (file:///core/computed/computed-artifact.js)\n    at HasHsts.getRawHsts (file:///core/audits/has-hsts.js)\n    at HasHsts.audit (file:///core/audits/has-hsts.js)\n    at Runner._runAudit (file:///core/runner.js)\n    at Runner._runAudits (file:///core/runner.js)\n    at async Runner.audit (file:///core/runner.js)\n    at async auditGatherSteps (file:///core/user-flow.js)\n    at async Module.auditFlowArtifacts (file:///core/index.js)\n    at async generateFlowResult (file:///core/scripts/update-flow-fixtures.js)"
-          },
           "script-treemap-data": {
             "id": "script-treemap-data",
             "title": "Script Treemap Data",
@@ -10905,10 +10897,6 @@
                 "group": "best-practices-trust-safety"
               },
               {
-                "id": "has-hsts",
-                "weight": 0
-              },
-              {
                 "id": "image-aspect-ratio",
                 "weight": 1,
                 "group": "best-practices-ux"
@@ -11654,25 +11642,25 @@
             },
             {
               "startTime": 77,
-              "name": "lh:audit:has-hsts",
-              "duration": 1,
-              "entryType": "measure"
-            },
-            {
-              "startTime": 78,
-              "name": "lh:computed:MainResource",
-              "duration": 1,
-              "entryType": "measure"
-            },
-            {
-              "startTime": 79,
               "name": "lh:audit:script-treemap-data",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 80,
+              "startTime": 78,
               "name": "lh:computed:ModuleDuplication",
+              "duration": 1,
+              "entryType": "measure"
+            },
+            {
+              "startTime": 79,
+              "name": "lh:computed:UnusedJavascriptSummary",
+              "duration": 1,
+              "entryType": "measure"
+            },
+            {
+              "startTime": 80,
+              "name": "lh:computed:UnusedJavascriptSummary",
               "duration": 1,
               "entryType": "measure"
             },
@@ -11684,138 +11672,126 @@
             },
             {
               "startTime": 82,
-              "name": "lh:computed:UnusedJavascriptSummary",
-              "duration": 1,
-              "entryType": "measure"
-            },
-            {
-              "startTime": 83,
-              "name": "lh:computed:UnusedJavascriptSummary",
-              "duration": 1,
-              "entryType": "measure"
-            },
-            {
-              "startTime": 84,
               "name": "lh:audit:uses-long-cache-ttl",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 85,
+              "startTime": 83,
               "name": "lh:audit:total-byte-weight",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 86,
+              "startTime": 84,
               "name": "lh:audit:unminified-css",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 87,
+              "startTime": 85,
               "name": "lh:computed:LoadSimulator",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 88,
+              "startTime": 86,
               "name": "lh:audit:unminified-javascript",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 89,
+              "startTime": 87,
               "name": "lh:audit:unused-javascript",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 90,
+              "startTime": 88,
               "name": "lh:audit:modern-image-formats",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 91,
+              "startTime": 89,
               "name": "lh:audit:uses-optimized-images",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 92,
+              "startTime": 90,
               "name": "lh:audit:uses-text-compression",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 93,
+              "startTime": 91,
               "name": "lh:audit:uses-responsive-images",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 94,
+              "startTime": 92,
               "name": "lh:computed:ImageRecords",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 95,
+              "startTime": 93,
               "name": "lh:audit:efficient-animated-content",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 96,
+              "startTime": 94,
               "name": "lh:audit:duplicated-javascript",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 97,
+              "startTime": 95,
               "name": "lh:audit:legacy-javascript",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 98,
+              "startTime": 96,
               "name": "lh:audit:inspector-issues",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 99,
+              "startTime": 97,
               "name": "lh:audit:no-document-write",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 100,
+              "startTime": 98,
               "name": "lh:audit:uses-passive-event-listeners",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 101,
+              "startTime": 99,
               "name": "lh:audit:work-during-interaction",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 102,
+              "startTime": 100,
               "name": "lh:audit:bf-cache",
               "duration": 1,
               "entryType": "measure"
             },
             {
-              "startTime": 103,
+              "startTime": 101,
               "name": "lh:runner:generate",
               "duration": 1,
               "entryType": "measure"
             }
           ],
-          "total": 104
+          "total": 102
         },
         "i18n": {
           "rendererFormattedStrings": {
@@ -12161,12 +12137,6 @@
             ],
             "core/audits/valid-source-maps.js | description": [
               "audits[valid-source-maps].description"
-            ],
-            "core/audits/has-hsts.js | title": [
-              "audits[has-hsts].title"
-            ],
-            "core/audits/has-hsts.js | description": [
-              "audits[has-hsts].description"
             ],
             "core/audits/byte-efficiency/uses-long-cache-ttl.js | failureTitle": [
               "audits[uses-long-cache-ttl].title"
@@ -19925,7 +19895,7 @@
           "has-hsts": {
             "id": "has-hsts",
             "title": "Use a strong HSTS policy",
-            "description": "Deployment of the HSTS header significantly reduces the risk of downgrading of and eavesdropping attacks on HTTP connections. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
+            "description": "Deployment of the HSTS header significantly reduces the risk of downgrading HTTP connections and eavesdropping attacks. A rollout in stages, starting with a low max-age is recommended. [Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -19959,12 +19929,12 @@
               "items": [
                 {
                   "directive": "includeSubDomains",
-                  "description": "No includeSubDomains directive found",
+                  "description": "No `includeSubDomains` directive found",
                   "severity": "Medium"
                 },
                 {
                   "directive": "preload",
-                  "description": "No preload directive found",
+                  "description": "No `preload` directive found",
                   "severity": "Medium"
                 }
               ]
@@ -22594,7 +22564,8 @@
               },
               {
                 "id": "has-hsts",
-                "weight": 0
+                "weight": 0,
+                "group": "hidden"
               },
               {
                 "id": "paste-preventing-inputs",

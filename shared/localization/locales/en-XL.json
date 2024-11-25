@@ -984,25 +984,25 @@
     "message": "Ŝév̂ér̂ít̂ý"
   },
   "core/audits/has-hsts.js | description": {
-    "message": "D̂ép̂ĺôým̂én̂t́ ôf́ t̂h́ê H́ŜT́Ŝ h́êád̂ér̂ śîǵn̂íf̂íĉán̂t́l̂ý r̂éd̂úĉéŝ t́ĥé r̂íŝḱ ôf́ d̂óŵńĝŕâd́îńĝ óf̂ án̂d́ êáv̂éŝd́r̂óp̂ṕîńĝ át̂t́âćk̂ś ôń ĤT́T̂Ṕ ĉón̂ńêćt̂íôńŝ. Á r̂ól̂ĺôút̂ ín̂ śt̂áĝéŝ, śt̂ár̂t́îńĝ ẃît́ĥ á l̂óŵ ḿâx́-âǵê íŝ ŕêćôḿm̂én̂d́êd́. [L̂éâŕn̂ ẃĥát̂ H́ŜT́Ŝ íŝ.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)"
+    "message": "D̂ép̂ĺôým̂én̂t́ ôf́ t̂h́ê H́ŜT́Ŝ h́êád̂ér̂ śîǵn̂íf̂íĉán̂t́l̂ý r̂éd̂úĉéŝ t́ĥé r̂íŝḱ ôf́ d̂óŵńĝŕâd́îńĝ H́T̂T́P̂ ćôńn̂éĉt́îón̂ś âńd̂ éâv́êśd̂ŕôṕp̂ín̂ǵ ât́t̂áĉḱŝ. Á r̂ól̂ĺôút̂ ín̂ śt̂áĝéŝ, śt̂ár̂t́îńĝ ẃît́ĥ á l̂óŵ ḿâx́-âǵê íŝ ŕêćôḿm̂én̂d́êd́. [L̂éâŕn̂ ẃĥát̂ H́ŜT́Ŝ íŝ.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)"
   },
   "core/audits/has-hsts.js | invalidSyntax": {
     "message": "Îńv̂ál̂íd̂ śŷńt̂áx̂"
   },
   "core/audits/has-hsts.js | lowMaxAge": {
-    "message": "m̂áx̂-áĝé îś t̂óô ĺôẃ"
+    "message": "`max-age` îś t̂óô ĺôẃ"
   },
   "core/audits/has-hsts.js | noHsts": {
     "message": "N̂ó ĤŚT̂Ś ĥéâd́êŕ f̂óûńd̂"
   },
   "core/audits/has-hsts.js | noMaxAge": {
-    "message": "N̂ó m̂áx̂-áĝé d̂ír̂éĉt́îv́ê"
+    "message": "N̂ó `max-age` d̂ír̂éĉt́îv́ê"
   },
   "core/audits/has-hsts.js | noPreload": {
-    "message": "N̂ó p̂ŕêĺôád̂ d́îŕêćt̂ív̂é f̂óûńd̂"
+    "message": "N̂ó `preload` d̂ír̂éĉt́îv́ê f́ôún̂d́"
   },
   "core/audits/has-hsts.js | noSubdomain": {
-    "message": "N̂ó îńĉĺûd́êŚûb́D̂óm̂áîńŝ d́îŕêćt̂ív̂é f̂óûńd̂"
+    "message": "N̂ó `includeSubDomains` d̂ír̂éĉt́îv́ê f́ôún̂d́"
   },
   "core/audits/has-hsts.js | title": {
     "message": "Ûśê á ŝt́r̂ón̂ǵ ĤŚT̂Ś p̂ól̂íĉý"
