@@ -59,7 +59,7 @@ it('max-age missing, but other directives present', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No max-age directive');
+      .toBeDisplayString('No `max-age` directive');
   expect(results.details.items).toMatchObject([
     {
       directive: 'max-age',
@@ -93,7 +93,7 @@ it('max-age too low, but other directives present', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('max-age is too low');
+      .toBeDisplayString('`max-age` is too low');
   expect(results.details.items).toMatchObject([
     {
       directive: 'max-age',
@@ -127,7 +127,7 @@ it('includeSubDomains missing, but other directives present', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('Medium');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No includeSubDomains directive found');
+      .toBeDisplayString('No `includeSubDomains` directive found');
   expect(results.details.items).toMatchObject([
     {
       directive: 'includeSubDomains',
@@ -161,7 +161,7 @@ it('preload missing, but other directives present', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('Medium');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No preload directive found');
+      .toBeDisplayString('No `preload` directive found');
   expect(results.details.items).toMatchObject([
     {
       directive: 'preload',
@@ -264,7 +264,7 @@ it('Messed up directive and one more directive missing.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('Medium');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No includeSubDomains directive found');
+      .toBeDisplayString('No `includeSubDomains` directive found');
   expect(results.details.items[1].severity).toBeDisplayString('Low');
   expect(results.details.items[1].description)
       .toBeDisplayString('Invalid syntax');
