@@ -554,6 +554,7 @@ const defaultConfig = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         {id: 'origin-isolation', weight: 0, group: 'hidden'},
 =======
 >>>>>>> 5fb0b760d (Adding a lighthouse audit to check for the presence of HSTS.)
@@ -563,6 +564,9 @@ const defaultConfig = {
 =======
         {id: 'origin-isolation', weight: 0},
 >>>>>>> b2851bf51 (Adding changes to COOP audit similar to HSTS audit (recommendations from https://github.com/GoogleChrome/lighthouse/pull/16257).)
+=======
+        {id: 'origin-isolation', weight: 0, group: 'hidden'},
+>>>>>>> b58c659b8 (Hide Origin-isolation audit similar to HSTS audit earlier.)
         // User Experience
         {id: 'paste-preventing-inputs', weight: 3, group: 'best-practices-ux'},
         {id: 'image-aspect-ratio', weight: 1, group: 'best-practices-ux'},
