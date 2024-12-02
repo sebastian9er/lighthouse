@@ -15,7 +15,7 @@ const UIStrings = {
   description: 'Deployment of the HSTS header significantly ' +
     'reduces the risk of downgrading HTTP connections and eavesdropping attacks. ' +
     'A rollout in stages, starting with a low max-age is recommended. ' +
-    '[Learn what HSTS is.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)',
+    '[Learn more about using a strong HSTS policy.](https://developer.chrome.com/docs/lighthouse/best-practices/has-hsts)',
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if no HSTS header is deployed. "HSTS" stands for "HTTP Strict Transport Security". */
   noHsts: 'No HSTS header found',
   /** Summary text for the results of a Lighthouse audit that evaluates the HSTS header. This is displayed if the preload directive is missing. "HSTS" stands for "HTTP Strict Transport Security". */
