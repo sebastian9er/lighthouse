@@ -1,3 +1,19 @@
+<a name="12.2.3"></a>
+# 12.2.3 (2024-12-02)
+[Full Changelog](https://github.com/GoogleChrome/lighthouse/compare/v12.2.2...v12.2.3)
+
+This release is only for PageSpeed Insights and we expect it to ship within 2 weeks.
+
+## Notable Changes
+
+The CPU throttling factor for PageSpeed Insights has been adjusted ([#16256](https://github.com/GoogleChrome/lighthouse/pull/16256)) to account for the low CPU performance benchmarks typical in PageSpeed production environments. In general, TBT metric times for all sites should improve when testing with PageSpeed Insights.
+
+All other Lighthouse clients (Lighthouse CLI, the Node API, Lighthouse panel in DevTools, etc) should not be affected by this change.
+
+## Tests
+
+* inline-fs: fix error in Node 20 ([#16262](https://github.com/GoogleChrome/lighthouse/pull/16262))
+
  <a name="12.2.2"></a>
 # 12.2.2 (2024-11-14)
 [Full Changelog](https://github.com/GoogleChrome/lighthouse/compare/v12.2.1...v12.2.2)
