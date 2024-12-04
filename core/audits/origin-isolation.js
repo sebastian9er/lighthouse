@@ -4,10 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import {Audit} from './audit.js';
 import {MainResource} from '../computed/main-resource.js';
 import * as i18n from '../lib/i18n/i18n.js';
-
-import {Audit} from './audit.js';
 
 const UIStrings = {
   /** Title of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. "COOP" stands for "Cross-Origin-Opener-Policy". */
@@ -46,7 +45,7 @@ class OriginIsolation extends Audit {
   /**
    * @param {LH.Artifacts} artifacts
    * @param {LH.Audit.Context} context
-   * @return {Promise<coopHeaders: string[]>}
+   * @return {Promise<string[]>}
    */
   static async getRawCoop(artifacts, context) {
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
