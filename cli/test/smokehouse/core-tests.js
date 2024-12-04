@@ -100,6 +100,7 @@ const smokeTests = [
   oopifRequests,
   oopifScripts,
   originIsolationCoopPresent,
+  originIsolationCoopHeaderMissing,
   perfDebug,
   perfDiagnosticsAnimations,
   perfDiagnosticsThirdParty,
