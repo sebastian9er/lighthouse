@@ -120,7 +120,7 @@ class OriginIsolation extends Audit {
               str_(i18n.UIStrings.itemSeverityLow))),
     ];
 
-    return {score: violations.length || syntax.length > 1 ? 0 : 1, results};
+    return {score: violations.length || syntax.length ? 0 : 1, results};
   }
 
   /**

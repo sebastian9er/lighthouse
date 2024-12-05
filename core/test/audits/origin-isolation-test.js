@@ -191,7 +191,7 @@ describe('constructResults', () => {
   it('constructs result based on misconfigured COOP header', () => {
     const {score, results} =
         OriginIsolation.constructResults(['foo-directive']);
-    expect(score).toEqual(1);
+    expect(score).toEqual(0);
     expect(results[0].severity).toBeDisplayString('Low');
     expect(results[0].description)
         .toBeDisplayString('Invalid syntax');
