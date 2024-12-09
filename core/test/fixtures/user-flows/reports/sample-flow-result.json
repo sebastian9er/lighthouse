@@ -2154,8 +2154,8 @@
           },
           "origin-isolation": {
             "id": "origin-isolation",
-            "title": "Ensure the proper usage of the COOP header to isolate the origin.",
-            "description": "Deployment of the COOP header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. [Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)",
+            "title": "Ensure proper origin isolation with COOP",
+            "description": "Deployment of the Cross-Origin-Opener-Policy (COOP) header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. [Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -20012,8 +20012,8 @@
           },
           "origin-isolation": {
             "id": "origin-isolation",
-            "title": "Ensure the proper usage of the COOP header to isolate the origin.",
-            "description": "Deployment of the COOP header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. [Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)",
+            "title": "Ensure proper origin isolation with COOP",
+            "description": "Deployment of the Cross-Origin-Opener-Policy (COOP) header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. [Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {

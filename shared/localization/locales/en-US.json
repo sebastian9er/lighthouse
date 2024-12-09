@@ -1224,7 +1224,7 @@
     "message": "Severity"
   },
   "core/audits/origin-isolation.js | description": {
-    "message": "Deployment of the COOP header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. [Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)"
+    "message": "Deployment of the Cross-Origin-Opener-Policy (COOP) header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. [Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)"
   },
   "core/audits/origin-isolation.js | invalidSyntax": {
     "message": "Invalid syntax"
@@ -1233,7 +1233,7 @@
     "message": "No COOP header found"
   },
   "core/audits/origin-isolation.js | title": {
-    "message": "Ensure the proper usage of the COOP header to isolate the origin."
+    "message": "Ensure proper origin isolation with COOP"
   },
   "core/audits/preload-fonts.js | description": {
     "message": "Preload `optional` fonts so first-time visitors may use them. [Learn more about preloading fonts](https://web.dev/articles/preload-optional-fonts)"

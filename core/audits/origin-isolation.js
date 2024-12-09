@@ -12,7 +12,7 @@ const UIStrings = {
   /** Title of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. "COOP" stands for "Cross-Origin-Opener-Policy". */
   title: 'Ensure proper origin isolation with COOP',
   /** Description of a Lighthouse audit that evaluates the security of a page's COOP header for origin isolation. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "COOP" stands for "Cross-Origin-Opener-Policy". */
-  description: 'Deployment of the COOP header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. ' +
+  description: 'Deployment of the Cross-Origin-Opener-Policy (COOP) header allows isolation of the top-level document to not share a browsing context group with cross-origin documents. ' +
     '[Learn what the COOP header is and how it should be deployed.](https://web.dev/articles/why-coop-coep#coop)',
   /** Summary text for the results of a Lighthouse audit that evaluates the COOP header for origin isolation. This is displayed if no COOP header is deployed. "COOP" stands for "Cross-Origin-Opener-Policy". */
   noCoop: 'No COOP header found',
