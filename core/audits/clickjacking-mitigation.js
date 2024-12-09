@@ -10,7 +10,7 @@ import * as i18n from '../lib/i18n/i18n.js';
 
 const UIStrings = {
   /** Title of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  title: 'Use XFO or CSP to mitigate Clickjacking attacks.',
+  title: 'Ensure Clickjacking mitigation using XFO or CSP.',
   /** Description of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
   description: 'Deployment of either the X-Frame-Options or Content-Security-Policy (with the frame-ancestors directive) header will prevent Clickjacking attacks. While the XFO header is simpler to deploy, the CSP header is more flexible. [Learn more about Clickjacking prevention](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking).',
   /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed if there is neither a CSP nor XFO header deployed. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
@@ -40,9 +40,9 @@ class ClickjackingMitigation extends Audit {
       title: str_(UIStrings.title),
       description: str_(UIStrings.description),
       requiredArtifacts: ['devtoolsLogs', 'MetaElements', 'URL'],
+      supportedModes: ['navigation'],
     };
   }
-
 
   /**
    * @param {LH.Artifacts} artifacts
@@ -53,14 +53,8 @@ class ClickjackingMitigation extends Audit {
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
     const mainResource =
         await MainResource.request({devtoolsLog, URL: artifacts.URL}, context);
+    let cspMetaTags = [''];
 
-    const cspMetaTags =
-        artifacts.MetaElements
-            .filter(m => {
-              return m.httpEquiv &&
-                  m.httpEquiv.toLowerCase() === 'content-security-policy';
-            })
-            .flatMap(m => (m.content || '').split(','));
     const cspHeaders =
         mainResource.responseHeaders
             .filter(h => {
@@ -72,6 +66,15 @@ class ClickjackingMitigation extends Audit {
                            return h.name.toLowerCase() === 'x-frame-options';
                          })
                          .flatMap(h => h.value);
+    if (undefined !== artifacts.MetaElements) {
+      cspMetaTags =
+          artifacts.MetaElements
+              .filter(m => {
+                return m.httpEquiv &&
+                    m.httpEquiv.toLowerCase() === 'content-security-policy';
+              })
+              .flatMap(m => (m.content || '').split(','));
+    }
 
     const cspHeadersAndMetaTags =
         cspHeaders.map(v => v.toLowerCase())

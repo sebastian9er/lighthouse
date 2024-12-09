@@ -130,6 +130,38 @@ it('No CSP and no XFO headers but foo header found', async () => {
   ]);
 });
 
+it('No CSP and no XFO headers and not Meta but foo header found', async () => {
+  const artifacts = {
+    devtoolsLogs: {
+      defaultPass: networkRecordsToDevtoolsLog([
+        {
+          url: 'https://example.com',
+          responseHeaders: [
+            {name: 'Foo-Header', value: `same-origin`},
+          ],
+        },
+      ]),
+    },
+    URL: {
+      requestedUrl: 'https://example.com',
+      mainDocumentUrl: 'https://example.com',
+      finalDisplayedUrl: 'https://example.com',
+    },
+  };
+
+  const results =
+      await ClickjackingMitigation.audit(artifacts, {computedCache: new Map()});
+  expect(results.notApplicable).toBeFalsy();
+  expect(results.details.items[0].severity).toBeDisplayString('High');
+  expect(results.details.items[0].description)
+      .toBeDisplayString('No Clickjacking mitigation found.');
+  expect(results.details.items).toMatchObject([
+    {
+      directive: undefined,
+    },
+  ]);
+});
+
 it('Messed up XFO directive and no CSP present.', async () => {
   const artifacts = {
     MetaElements: [],
