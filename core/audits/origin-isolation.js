@@ -84,8 +84,10 @@ class OriginIsolation extends Audit {
    */
   static constructResults(coopHeaders) {
     const rawCoop = [...coopHeaders];
-    const allowedDirectives =
-        ['unsafe-none', 'same-origin-allow-popups', 'same-origin'];
+    const allowedDirectives = [
+      'unsafe-none', 'same-origin-allow-popups', 'same-origin',
+      'noopener-allow-popups'
+    ];
     const violations = [];
     const syntax = [];
 
