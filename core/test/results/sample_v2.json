@@ -6801,7 +6801,7 @@
         {
           "id": "origin-isolation",
           "weight": 0,
-          "group": "hidden"
+          "group": "best-practices-trust-safety"
         },
         {
           "id": "paste-preventing-inputs",
