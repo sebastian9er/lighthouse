@@ -194,6 +194,7 @@ const defaultConfig = {
     'csp-xss',
     'has-hsts',
     'origin-isolation',
+    'clickjacking-mitigation',
     'script-treemap-data',
     'accessibility/accesskeys',
     'accessibility/aria-allowed-attr',
