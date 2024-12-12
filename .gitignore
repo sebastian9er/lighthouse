@@ -68,6 +68,3 @@ yarn.lock
 !**/types/**/*.d.ts
 
 page-functions-test-case*out*.js
-package.json
-yarn.lock
-cli/test/smokehouse/frontends/smokehouse-bin.js
