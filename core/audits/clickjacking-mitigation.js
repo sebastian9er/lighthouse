@@ -15,12 +15,6 @@ const UIStrings = {
   description: 'Deployment of either the X-Frame-Options or Content-Security-Policy (with the frame-ancestors directive) header will prevent Clickjacking attacks. While the XFO header is simpler to deploy, the CSP header is more flexible. [Learn more about Clickjacking prevention](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking).',
   /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed if there is neither a CSP nor XFO header deployed. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
   noClickjackingMitigation: 'No Clickjacking mitigation found.',
-  /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed if the "frame-ancestors" directive is found, but the "self" and "none" keyword is missing. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  frameAncestorsNoSelfNoNone: 'The frame-ancestors directive was found, but self and none are missing. The developer needs to make sure it is configured correctly to mitigate Clickjacking attacks.',
-  /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed the XFO header is present, but the "SAMEORIGIN" and "DENY" keywords are missing. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  xfoNoSelfNoNone: 'The X-Frame-Options header was found, but neither SAMEORIGIN nor DENY was present.',
-  /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed if a CSP header is present, but no "frame-ancestors" directive within and no XFO header at all. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  headersPresentNoClickjackingMitigation: 'No Clickjacking mitigation is present, even though a CSP header is.',
   /** Label for a column in a data table; entries will be a directive of the XFO or CSP header. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
   columnDirective: 'Directive',
   /** Label for a column in a data table; entries will be the severity of an issue with the XFO or CSP header. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
@@ -109,9 +103,6 @@ class ClickjackingMitigation extends Audit {
   static constructResults(cspHeadersAndMetaTags, xfoHeaders) {
     const rawXfo = [...xfoHeaders];
     const allowedDirectives = ['deny', 'sameorigin'];
-    const violations = [];
-    const warnings = [];
-    let frameAncestorsPresent = false;
 
     // If there is none of the two headers, return early.
     if (!rawXfo.length && !cspHeadersAndMetaTags.length) {
@@ -129,52 +120,27 @@ class ClickjackingMitigation extends Audit {
     if (cspHeadersAndMetaTags.length) {
       for (const cspDirective of cspHeadersAndMetaTags.split(';')) {
         if (cspDirective.includes('frame-ancestors')) {
-          frameAncestorsPresent = true;
-        }
-        // If frame-ancestors but not self and not none, warn the developer.
-        if (cspDirective.includes('frame-ancestors') &&
-            !(cspDirective.includes('self') || cspDirective.includes('none'))) {
-          warnings.push({
-            severity: str_(i18n.UIStrings.itemSeverityMedium),
-            description: str_(UIStrings.frameAncestorsNoSelfNoNone),
-            directive: cspDirective,
-          });
+          // Pass the audit if frame-ancestors is present.
+          return {score: 1, results: []};
         }
       }
     }
 
     for (const actualDirective of xfoHeaders) {
-      // If there is a directive that's not sameorigin or deny.
-      if (!allowedDirectives.includes(actualDirective)) {
-        violations.push({
-          severity: str_(i18n.UIStrings.itemSeverityHigh),
-          description: str_(UIStrings.xfoNoSelfNoNone),
-          directive: actualDirective,
-        });
+      if (allowedDirectives.includes(actualDirective)) {
+        // DENY or SAMEORIGIN are present.
+        return {score: 1, results: []};
       }
     }
 
-    // The CSP header is present, but has no frame-ancestors. XFO is missing.
-    if (!frameAncestorsPresent && !rawXfo.length) {
-      violations.push({
+    return {
+      score: 0,
+      results: [{
         severity: str_(i18n.UIStrings.itemSeverityHigh),
-        description: str_(UIStrings.headersPresentNoClickjackingMitigation),
+        description: str_(UIStrings.noClickjackingMitigation),
         directive: undefined,
-      });
-    }
-
-    const results = [
-      ...violations.map(
-          f => this.findingToTableItem(
-              f.directive, f.description,
-              str_(i18n.UIStrings.itemSeverityHigh))),
-      ...warnings.map(
-          f => this.findingToTableItem(
-              f.directive, f.description,
-              str_(i18n.UIStrings.itemSeverityMedium))),
-    ];
-
-    return {score: violations.length || warnings.length ? 0 : 1, results};
+      }],
+    };
   }
 
   /**

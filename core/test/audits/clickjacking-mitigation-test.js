@@ -187,10 +187,10 @@ it('Messed up XFO directive and no CSP present.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('The X-Frame-Options header was found, but neither SAMEORIGIN nor DENY was present.');
+      .toBeDisplayString('No Clickjacking mitigation found.');
   expect(results.details.items).toMatchObject([
     {
-      directive: 'foodirective',
+      directive: undefined,
     },
   ]);
 });
@@ -220,7 +220,7 @@ it('Messed up CSP directive and no XFO present.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No Clickjacking mitigation is present, even though a CSP header is.');
+      .toBeDisplayString('No Clickjacking mitigation found.');
   expect(results.details.items).toMatchObject([
     {
       directive: undefined,
@@ -254,10 +254,10 @@ it('Messed up CSP and XFO directives.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('The X-Frame-Options header was found, but neither SAMEORIGIN nor DENY was present.');
+      .toBeDisplayString('No Clickjacking mitigation found.');
   expect(results.details.items).toMatchObject([
     {
-      directive: 'foodirective',
+      directive: undefined,
     },
   ]);
 });
@@ -450,10 +450,10 @@ describe('constructResults', () => {
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
         .toBeDisplayString(
-            'The X-Frame-Options header was found, but neither SAMEORIGIN nor DENY was present.');
+            'No Clickjacking mitigation found.');
     expect(results).toMatchObject([
       {
-        directive: 'foo-directive',
+        directive: undefined,
       },
     ]);
   });
