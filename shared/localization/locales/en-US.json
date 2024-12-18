@@ -768,7 +768,7 @@
     "message": "Severity"
   },
   "core/audits/clickjacking-mitigation.js | description": {
-    "message": "Deployment of either the X-Frame-Options or Content-Security-Policy (with the frame-ancestors directive) header will prevent Clickjacking attacks. While the XFO header is simpler to deploy, the CSP header is more flexible. [Learn more about Clickjacking prevention](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking)."
+    "message": "Deployment of either the X-Frame-Options or Content-Security-Policy (with the frame-ancestors directive) header will prevent Clickjacking attacks. While the XFO header is simpler to deploy, the CSP header is more flexible. [Learn more about mitigating Clickjacking with XFO and CSP](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation)."
   },
   "core/audits/clickjacking-mitigation.js | noClickjackingMitigation": {
     "message": "No Clickjacking mitigation found."

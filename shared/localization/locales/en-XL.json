@@ -768,7 +768,7 @@
     "message": "Ŝév̂ér̂ít̂ý"
   },
   "core/audits/clickjacking-mitigation.js | description": {
-    "message": "D̂ép̂ĺôým̂én̂t́ ôf́ êít̂h́êŕ t̂h́ê X́-F̂ŕâḿê-Óp̂t́îón̂ś ôŕ Ĉón̂t́êńt̂-Śêćûŕît́ŷ-Ṕôĺîćŷ (ẃît́ĥ t́ĥé f̂ŕâḿê-án̂ćêśt̂ór̂ś d̂ír̂éĉt́îv́ê) h́êád̂ér̂ ẃîĺl̂ ṕr̂év̂én̂t́ Ĉĺîćk̂j́âćk̂ín̂ǵ ât́t̂áĉḱŝ. Ẃĥíl̂é t̂h́ê X́F̂Ó ĥéâd́êŕ îś ŝím̂ṕl̂ér̂ t́ô d́êṕl̂óŷ, t́ĥé ĈŚP̂ h́êád̂ér̂ íŝ ḿôŕê f́l̂éx̂íb̂ĺê. [Ĺêár̂ń m̂ór̂é âb́ôút̂ Ćl̂íĉḱĵáĉḱîńĝ ṕr̂év̂én̂t́îón̂](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking)."
+    "message": "D̂ép̂ĺôým̂én̂t́ ôf́ êít̂h́êŕ t̂h́ê X́-F̂ŕâḿê-Óp̂t́îón̂ś ôŕ Ĉón̂t́êńt̂-Śêćûŕît́ŷ-Ṕôĺîćŷ (ẃît́ĥ t́ĥé f̂ŕâḿê-án̂ćêśt̂ór̂ś d̂ír̂éĉt́îv́ê) h́êád̂ér̂ ẃîĺl̂ ṕr̂év̂én̂t́ Ĉĺîćk̂j́âćk̂ín̂ǵ ât́t̂áĉḱŝ. Ẃĥíl̂é t̂h́ê X́F̂Ó ĥéâd́êŕ îś ŝím̂ṕl̂ér̂ t́ô d́êṕl̂óŷ, t́ĥé ĈŚP̂ h́êád̂ér̂ íŝ ḿôŕê f́l̂éx̂íb̂ĺê. [Ĺêár̂ń m̂ór̂é âb́ôút̂ ḿît́îǵât́îńĝ Ćl̂íĉḱĵáĉḱîńĝ ẃît́ĥ X́F̂Ó âńd̂ ĆŜṔ](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation)."
   },
   "core/audits/clickjacking-mitigation.js | noClickjackingMitigation": {
     "message": "N̂ó Ĉĺîćk̂j́âćk̂ín̂ǵ m̂ít̂íĝát̂íôń f̂óûńd̂."
