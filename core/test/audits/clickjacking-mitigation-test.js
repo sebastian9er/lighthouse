@@ -14,7 +14,6 @@ it('marked N/A if no violations found', async () => {
       mainDocumentUrl: 'https://example.com',
       finalDisplayedUrl: 'https://example.com',
     },
-    MetaElements: [],
     devtoolsLogs: {
       defaultPass: networkRecordsToDevtoolsLog([
         {
@@ -39,7 +38,6 @@ it('marked N/A if no violations found', async () => {
 
 it('No XFO header but CSP header found', async () => {
   const artifacts = {
-    MetaElements: [],
     devtoolsLogs: {
       defaultPass: networkRecordsToDevtoolsLog([
         {
@@ -69,7 +67,6 @@ it('No XFO header but CSP header found', async () => {
 
 it('No CSP header but XFO header found', async () => {
   const artifacts = {
-    MetaElements: [],
     devtoolsLogs: {
       defaultPass: networkRecordsToDevtoolsLog([
         {
@@ -98,39 +95,6 @@ it('No CSP header but XFO header found', async () => {
 });
 
 it('No CSP and no XFO headers but foo header found', async () => {
-  const artifacts = {
-    MetaElements: [],
-    devtoolsLogs: {
-      defaultPass: networkRecordsToDevtoolsLog([
-        {
-          url: 'https://example.com',
-          responseHeaders: [
-            {name: 'Foo-Header', value: `same-origin`},
-          ],
-        },
-      ]),
-    },
-    URL: {
-      requestedUrl: 'https://example.com',
-      mainDocumentUrl: 'https://example.com',
-      finalDisplayedUrl: 'https://example.com',
-    },
-  };
-
-  const results =
-      await ClickjackingMitigation.audit(artifacts, {computedCache: new Map()});
-  expect(results.notApplicable).toBeFalsy();
-  expect(results.details.items[0].severity).toBeDisplayString('High');
-  expect(results.details.items[0].description)
-      .toBeDisplayString('No Clickjacking mitigation found.');
-  expect(results.details.items).toMatchObject([
-    {
-      directive: undefined,
-    },
-  ]);
-});
-
-it('No CSP and no XFO headers and not Meta but foo header found', async () => {
   const artifacts = {
     devtoolsLogs: {
       defaultPass: networkRecordsToDevtoolsLog([
@@ -164,7 +128,6 @@ it('No CSP and no XFO headers and not Meta but foo header found', async () => {
 
 it('Messed up XFO directive and no CSP present.', async () => {
   const artifacts = {
-    MetaElements: [],
     devtoolsLogs: {
       defaultPass: networkRecordsToDevtoolsLog([
         {
@@ -197,7 +160,6 @@ it('Messed up XFO directive and no CSP present.', async () => {
 
 it('Messed up CSP directive and no XFO present.', async () => {
   const artifacts = {
-    MetaElements: [],
     devtoolsLogs: {
       defaultPass: networkRecordsToDevtoolsLog([
         {
@@ -230,7 +192,6 @@ it('Messed up CSP directive and no XFO present.', async () => {
 
 it('Messed up CSP and XFO directives.', async () => {
   const artifacts = {
-    MetaElements: [],
     devtoolsLogs: {
       defaultPass: networkRecordsToDevtoolsLog([
         {
@@ -262,81 +223,9 @@ it('Messed up CSP and XFO directives.', async () => {
   ]);
 });
 
-it('Frame-ancestors in the MetaElement and no XFO present.', async () => {
-  const artifacts = {
-    MetaElements: [
-      {
-        httpEquiv: 'Content-Security-Policy',
-        content: `frame-ancestors 'none'`,
-      },
-    ],
-    devtoolsLogs: {
-      defaultPass: networkRecordsToDevtoolsLog([
-        {
-          url: 'https://example.com',
-          responseHeaders: [
-          ],
-        },
-      ]),
-    },
-    URL: {
-      requestedUrl: 'https://example.com',
-      mainDocumentUrl: 'https://example.com',
-      finalDisplayedUrl: 'https://example.com',
-    },
-  };
-
-  const results =
-      await ClickjackingMitigation.audit(artifacts, {computedCache: new Map()});
-  expect(results.details.items).toHaveLength(0);
-  expect(results.notApplicable).toBeTruthy();
-});
-
-it('Messed up CSP directive in the header, but frame-ancestors in the MetaElement and no XFO present.',
-   async () => {
-     const artifacts = {
-       MetaElements: [
-         {
-           httpEquiv: 'Content-Security-Policy',
-           content: `frame-ancestors 'self'`,
-         },
-       ],
-       devtoolsLogs: {
-         defaultPass: networkRecordsToDevtoolsLog([
-           {
-             url: 'https://example.com',
-             responseHeaders: [
-               {
-                 name: 'Content-Security-Policy',
-                 value:
-                     `foo-directive 'none'; report-uri https://csp.example.com`
-               },
-             ],
-           },
-         ]),
-       },
-       URL: {
-         requestedUrl: 'https://example.com',
-         mainDocumentUrl: 'https://example.com',
-         finalDisplayedUrl: 'https://example.com',
-       },
-     };
-
-       const results =
-      await ClickjackingMitigation.audit(artifacts, {computedCache: new Map()});
-  expect(results.details.items).toHaveLength(0);
-  expect(results.notApplicable).toBeTruthy();
-   });
-
 describe('getRawCspsAndXfo', () => {
   it('basic case', async () => {
     const artifacts = {
-      MetaElements: [
-        {
-          httpEquiv: 'Content-Security-Policy',
-          content: `default-src 'none'`,
-        },
-      ],
       URL: {
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
@@ -360,16 +249,15 @@ describe('getRawCspsAndXfo', () => {
         ]),
       },
     };
-    const {cspHeadersAndMetaTags, xfoHeaders} =
+    const {cspHeaders, xfoHeaders} =
       await ClickjackingMitigation.getRawCspsAndXfo(artifacts, {computedCache: new Map()});
-    expect(cspHeadersAndMetaTags).toEqual(`frame-ancestors'self';default-src'none'`);
+    expect(cspHeaders).toEqual(["frame-ancestors 'self'"]);
     expect(xfoHeaders).toEqual([`sameorigin`]);
   });
 
   it('ignore if empty', async () => {
     const artifacts = {
-      MetaElements: [],
-      URL: {
+        URL: {
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
         finalDisplayedUrl: 'https://example.com',
@@ -392,9 +280,9 @@ describe('getRawCspsAndXfo', () => {
         ]),
       },
     };
-    const {cspHeadersAndMetaTags, xfoHeaders} =
+    const {cspHeaders, xfoHeaders} =
       await ClickjackingMitigation.getRawCspsAndXfo(artifacts, {computedCache: new Map()});
-    expect(cspHeadersAndMetaTags).toEqual(``);
+    expect(cspHeaders).toEqual([]);
     expect(xfoHeaders).toEqual([
       `deny`,
     ]);
@@ -402,8 +290,7 @@ describe('getRawCspsAndXfo', () => {
 
   it('ignore if only whitespace', async () => {
     const artifacts = {
-      MetaElements: [],
-      URL: {
+        URL: {
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
         finalDisplayedUrl: 'https://example.com',
@@ -426,9 +313,9 @@ describe('getRawCspsAndXfo', () => {
         ]),
       },
     };
-    const {cspHeadersAndMetaTags, xfoHeaders} =
+    const {cspHeaders, xfoHeaders} =
       await ClickjackingMitigation.getRawCspsAndXfo(artifacts, {computedCache: new Map()});
-    expect(cspHeadersAndMetaTags).toEqual(``);
+    expect(cspHeaders).toEqual([]);
     expect(xfoHeaders).toEqual([
       `deny`,
     ]);

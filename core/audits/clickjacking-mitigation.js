@@ -33,7 +33,7 @@ class ClickjackingMitigation extends Audit {
       scoreDisplayMode: Audit.SCORING_MODES.INFORMATIVE,
       title: str_(UIStrings.title),
       description: str_(UIStrings.description),
-      requiredArtifacts: ['devtoolsLogs', 'MetaElements', 'URL'],
+      requiredArtifacts: ['devtoolsLogs', 'URL'],
       supportedModes: ['navigation'],
     };
   }
@@ -41,44 +41,29 @@ class ClickjackingMitigation extends Audit {
   /**
    * @param {LH.Artifacts} artifacts
    * @param {LH.Audit.Context} context
-   * @return {Promise<{cspHeadersAndMetaTags: string, xfoHeaders: string[]}>}
+   * @return {Promise<{cspHeaders: string[], xfoHeaders: string[]}>}
    */
   static async getRawCspsAndXfo(artifacts, context) {
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
     const mainResource =
         await MainResource.request({devtoolsLog, URL: artifacts.URL}, context);
-    let cspMetaTags = [''];
 
-    const cspHeaders =
-        mainResource.responseHeaders
-            .filter(h => {
-              return h.name.toLowerCase() === 'content-security-policy';
-            })
-            .flatMap(h => h.value.split(','));
+    const cspHeaders = mainResource.responseHeaders
+        .filter(h => {
+          return h.name.toLowerCase() === 'content-security-policy';
+        })
+        .flatMap(h => h.value.split(','))
+        .filter(rawCsp => rawCsp.replace(/\s/g, ''));
     let xfoHeaders = mainResource.responseHeaders
                          .filter(h => {
                            return h.name.toLowerCase() === 'x-frame-options';
                          })
                          .flatMap(h => h.value);
-    if (undefined !== artifacts.MetaElements) {
-      cspMetaTags =
-          artifacts.MetaElements
-              .filter(m => {
-                return m.httpEquiv &&
-                    m.httpEquiv.toLowerCase() === 'content-security-policy';
-              })
-              .flatMap(m => (m.content || '').split(','));
-    }
-
-    const cspHeadersAndMetaTags =
-        cspHeaders.map(v => v.toLowerCase())
-            .concat(cspMetaTags.map(v => v.toLowerCase()))
-            .join(';').replace(/\s/g, '');
 
     // Sanitize the XFO header value.
     xfoHeaders = xfoHeaders.map(v => v.toLowerCase().replace(/\s/g, ''));
 
-    return {cspHeadersAndMetaTags, xfoHeaders};
+    return {cspHeaders, xfoHeaders};
   }
 
   /**
@@ -96,16 +81,16 @@ class ClickjackingMitigation extends Audit {
   }
 
   /**
-   * @param {string} cspHeadersAndMetaTags
+   * @param {string[]} cspHeaders
    * @param {string[]} xfoHeaders
    * @return {{score: number, results: LH.Audit.Details.TableItem[]}}
    */
-  static constructResults(cspHeadersAndMetaTags, xfoHeaders) {
+  static constructResults(cspHeaders, xfoHeaders) {
     const rawXfo = [...xfoHeaders];
     const allowedDirectives = ['deny', 'sameorigin'];
 
     // If there is none of the two headers, return early.
-    if (!rawXfo.length && !cspHeadersAndMetaTags.length) {
+    if (!rawXfo.length && !cspHeaders.length) {
       return {
         score: 0,
         results: [{
@@ -117,8 +102,8 @@ class ClickjackingMitigation extends Audit {
     }
 
     // Check for frame-ancestors in CSP.
-    if (cspHeadersAndMetaTags.length) {
-      for (const cspDirective of cspHeadersAndMetaTags.split(';')) {
+    if (cspHeaders.length) {
+      for (const cspDirective of cspHeaders) {
         if (cspDirective.includes('frame-ancestors')) {
           // Pass the audit if frame-ancestors is present.
           return {score: 1, results: []};
@@ -149,8 +134,8 @@ class ClickjackingMitigation extends Audit {
    * @return {Promise<LH.Audit.Product>}
    */
   static async audit(artifacts, context) {
-    const {cspHeadersAndMetaTags, xfoHeaders} = await this.getRawCspsAndXfo(artifacts, context);
-    const {score, results} = this.constructResults(cspHeadersAndMetaTags, xfoHeaders);
+    const {cspHeaders, xfoHeaders} = await this.getRawCspsAndXfo(artifacts, context);
+    const {score, results} = this.constructResults(cspHeaders, xfoHeaders);
 
     /** @type {LH.Audit.Details.Table['headings']} */
     const headings = [
