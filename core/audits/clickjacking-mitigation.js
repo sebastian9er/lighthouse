@@ -12,9 +12,9 @@ const UIStrings = {
   /** Title of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
   title: 'Ensure Clickjacking mitigation through XFO or CSP.',
   /** Description of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  description: 'Deployment of either the X-Frame-Options or Content-Security-Policy (with the frame-ancestors directive) header will prevent Clickjacking attacks. While the XFO header is simpler to deploy, the CSP header is more flexible. [Learn more about mitigating Clickjacking with XFO and CSP](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).',
+  description: 'The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header can be used to mitigate clickjacking attacks. While the XFO header is simpler to deploy, the `frame-ancestors` CSP directive is more flexible. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).',
   /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed if there is neither a CSP nor XFO header deployed. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  noClickjackingMitigation: 'No Clickjacking mitigation found.',
+  noClickjackingMitigation: 'No XFO or CSP frame-ancestors found',
   /** Label for a column in a data table; entries will be a directive of the XFO or CSP header. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
   columnDirective: 'Directive',
   /** Label for a column in a data table; entries will be the severity of an issue with the XFO or CSP header. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
@@ -89,25 +89,11 @@ class ClickjackingMitigation extends Audit {
     const rawXfo = [...xfoHeaders];
     const allowedDirectives = ['deny', 'sameorigin'];
 
-    // If there is none of the two headers, return early.
-    if (!rawXfo.length && !cspHeaders.length) {
-      return {
-        score: 0,
-        results: [{
-          severity: str_(i18n.UIStrings.itemSeverityHigh),
-          description: str_(UIStrings.noClickjackingMitigation),
-          directive: undefined,
-        }],
-      };
-    }
-
     // Check for frame-ancestors in CSP.
-    if (cspHeaders.length) {
-      for (const cspDirective of cspHeaders) {
-        if (cspDirective.includes('frame-ancestors')) {
-          // Pass the audit if frame-ancestors is present.
-          return {score: 1, results: []};
-        }
+    for (const cspHeader of cspHeaders) {
+      if (cspHeader.includes('frame-ancestors')) {
+        // Pass the audit if frame-ancestors is present.
+        return {score: 1, results: []};
       }
     }
 
