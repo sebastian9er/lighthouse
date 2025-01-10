@@ -15,11 +15,11 @@ const expectations = {
     finalDisplayedUrl: 'https://example.com/',
     audits: {
       'clickjacking-mitigation': {
-        score: 0,
+        score: 1,
         details: {
           items: [
             {
-              description: 'No Clickjacking mitigation found.',
+              description: 'No XFO or CSP frame-ancestors found',
               severity: 'High',
             },
           ],
