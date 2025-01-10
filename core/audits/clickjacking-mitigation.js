@@ -83,7 +83,6 @@ class ClickjackingMitigation extends Audit {
    * @return {{score: number, results: LH.Audit.Details.TableItem[]}}
    */
   static constructResults(cspHeaders, xfoHeaders) {
-    const rawXfo = [...xfoHeaders];
     const allowedDirectives = ['deny', 'sameorigin'];
 
     // Check for frame-ancestors in CSP.

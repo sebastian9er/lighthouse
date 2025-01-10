@@ -23,7 +23,7 @@ it('marked N/A if no violations found', async () => {
             {
               name: 'Content-Security-Policy',
               value:
-                  `script-src 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; report-uri https://csp.example.com`
+                  `script-src 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; report-uri https://csp.example.com`,
             },
           ],
         },
@@ -43,10 +43,10 @@ it('No XFO header but CSP header found', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-                        {
+            {
               name: 'Content-Security-Policy',
               value:
-                  `script-src 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; report-uri https://csp.example.com`
+                  `script-src 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; report-uri https://csp.example.com`,
             },
           ],
         },
@@ -72,10 +72,10 @@ it('No CSP header but XFO header found', async () => {
         {
           url: 'https://example.com',
           responseHeaders: [
-                        {
+            {
               name: 'X-Frame-Options',
               value:
-                  `SAMEORIGIN`
+                  `SAMEORIGIN`,
             },
           ],
         },
@@ -118,7 +118,7 @@ it('No CSP and no XFO headers but foo header found', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No Clickjacking mitigation found.');
+      .toBeDisplayString('No XFO or CSP frame-ancestors found');
 });
 
 it('Messed up XFO directive and no CSP present.', async () => {
@@ -145,7 +145,7 @@ it('Messed up XFO directive and no CSP present.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No Clickjacking mitigation found.');
+      .toBeDisplayString('No XFO or CSP frame-ancestors found');
 });
 
 it('Messed up CSP directive and no XFO present.', async () => {
@@ -172,7 +172,7 @@ it('Messed up CSP directive and no XFO present.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No Clickjacking mitigation found.');
+      .toBeDisplayString('No XFO or CSP frame-ancestors found');
 });
 
 it('Messed up CSP and XFO directives.', async () => {
@@ -200,7 +200,7 @@ it('Messed up CSP and XFO directives.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No Clickjacking mitigation found.');
+      .toBeDisplayString('No XFO or CSP frame-ancestors found');
 });
 
 describe('getRawCspsAndXfo', () => {
@@ -231,13 +231,13 @@ describe('getRawCspsAndXfo', () => {
     };
     const {cspHeaders, xfoHeaders} =
       await ClickjackingMitigation.getRawCspsAndXfo(artifacts, {computedCache: new Map()});
-    expect(cspHeaders).toEqual(["frame-ancestors 'self'"]);
+    expect(cspHeaders).toEqual([`frame-ancestors 'self'`]);
     expect(xfoHeaders).toEqual([`sameorigin`]);
   });
 
   it('ignore if empty', async () => {
     const artifacts = {
-        URL: {
+      URL: {
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
         finalDisplayedUrl: 'https://example.com',
@@ -270,7 +270,7 @@ describe('getRawCspsAndXfo', () => {
 
   it('ignore if only whitespace', async () => {
     const artifacts = {
-        URL: {
+      URL: {
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
         finalDisplayedUrl: 'https://example.com',
@@ -317,7 +317,7 @@ describe('constructResults', () => {
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
         .toBeDisplayString(
-            'No Clickjacking mitigation found.');
+            'No XFO or CSP frame-ancestors found');
   });
 
   it('returns single item for no XFO and no CSP', () => {
@@ -325,6 +325,6 @@ describe('constructResults', () => {
     expect(score).toEqual(0);
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
-        .toBeDisplayString('No Clickjacking mitigation found.');
+        .toBeDisplayString('No XFO or CSP frame-ancestors found');
   });
 });
