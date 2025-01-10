@@ -119,11 +119,6 @@ it('No CSP and no XFO headers but foo header found', async () => {
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
       .toBeDisplayString('No Clickjacking mitigation found.');
-  expect(results.details.items).toMatchObject([
-    {
-      directive: undefined,
-    },
-  ]);
 });
 
 it('Messed up XFO directive and no CSP present.', async () => {
@@ -151,11 +146,6 @@ it('Messed up XFO directive and no CSP present.', async () => {
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
       .toBeDisplayString('No Clickjacking mitigation found.');
-  expect(results.details.items).toMatchObject([
-    {
-      directive: undefined,
-    },
-  ]);
 });
 
 it('Messed up CSP directive and no XFO present.', async () => {
@@ -183,11 +173,6 @@ it('Messed up CSP directive and no XFO present.', async () => {
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
       .toBeDisplayString('No Clickjacking mitigation found.');
-  expect(results.details.items).toMatchObject([
-    {
-      directive: undefined,
-    },
-  ]);
 });
 
 it('Messed up CSP and XFO directives.', async () => {
@@ -216,11 +201,6 @@ it('Messed up CSP and XFO directives.', async () => {
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
       .toBeDisplayString('No Clickjacking mitigation found.');
-  expect(results.details.items).toMatchObject([
-    {
-      directive: undefined,
-    },
-  ]);
 });
 
 describe('getRawCspsAndXfo', () => {
@@ -338,11 +318,6 @@ describe('constructResults', () => {
     expect(results[0].description)
         .toBeDisplayString(
             'No Clickjacking mitigation found.');
-    expect(results).toMatchObject([
-      {
-        directive: undefined,
-      },
-    ]);
   });
 
   it('returns single item for no XFO and no CSP', () => {
@@ -351,10 +326,5 @@ describe('constructResults', () => {
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
         .toBeDisplayString('No Clickjacking mitigation found.');
-    expect(results).toMatchObject([
-      {
-        directive: undefined,
-      },
-    ]);
   });
 });

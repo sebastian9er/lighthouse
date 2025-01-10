@@ -761,17 +761,14 @@
   "core/audits/byte-efficiency/uses-text-compression.js | title": {
     "message": "Enable text compression"
   },
-  "core/audits/clickjacking-mitigation.js | columnDirective": {
-    "message": "Directive"
-  },
   "core/audits/clickjacking-mitigation.js | columnSeverity": {
     "message": "Severity"
   },
   "core/audits/clickjacking-mitigation.js | description": {
-    "message": "Deployment of either the X-Frame-Options or Content-Security-Policy (with the frame-ancestors directive) header will prevent Clickjacking attacks. While the XFO header is simpler to deploy, the CSP header is more flexible. [Learn more about mitigating Clickjacking with XFO and CSP](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation)."
+    "message": "The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header can be used to mitigate clickjacking attacks. While the XFO header is simpler to deploy, the `frame-ancestors` CSP directive is more flexible. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation)."
   },
   "core/audits/clickjacking-mitigation.js | noClickjackingMitigation": {
-    "message": "No Clickjacking mitigation found."
+    "message": "No XFO or CSP frame-ancestors found"
   },
   "core/audits/clickjacking-mitigation.js | title": {
     "message": "Ensure Clickjacking mitigation through XFO or CSP."

@@ -15,8 +15,6 @@ const UIStrings = {
   description: 'The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header can be used to mitigate clickjacking attacks. While the XFO header is simpler to deploy, the `frame-ancestors` CSP directive is more flexible. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).',
   /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed if there is neither a CSP nor XFO header deployed. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
   noClickjackingMitigation: 'No XFO or CSP frame-ancestors found',
-  /** Label for a column in a data table; entries will be a directive of the XFO or CSP header. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  columnDirective: 'Directive',
   /** Label for a column in a data table; entries will be the severity of an issue with the XFO or CSP header. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
   columnSeverity: 'Severity',
 };
@@ -74,7 +72,6 @@ class ClickjackingMitigation extends Audit {
    */
   static findingToTableItem(directive, findingDescription, severity) {
     return {
-      directive: directive,
       description: findingDescription,
       severity,
     };
@@ -109,7 +106,6 @@ class ClickjackingMitigation extends Audit {
       results: [{
         severity: str_(i18n.UIStrings.itemSeverityHigh),
         description: str_(UIStrings.noClickjackingMitigation),
-        directive: undefined,
       }],
     };
   }
@@ -127,7 +123,6 @@ class ClickjackingMitigation extends Audit {
     const headings = [
       /* eslint-disable max-len */
       {key: 'description', valueType: 'text', subItemsHeading: {key: 'description'}, label: str_(i18n.UIStrings.columnDescription)},
-      {key: 'directive', valueType: 'code', subItemsHeading: {key: 'directive'}, label: str_(UIStrings.columnDirective)},
       {key: 'severity', valueType: 'text', subItemsHeading: {key: 'severity'}, label: str_(UIStrings.columnSeverity)},
       /* eslint-enable max-len */
     ];

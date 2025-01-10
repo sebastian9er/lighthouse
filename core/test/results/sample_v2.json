@@ -2852,7 +2852,7 @@
     "clickjacking-mitigation": {
       "id": "clickjacking-mitigation",
       "title": "Ensure Clickjacking mitigation through XFO or CSP.",
-      "description": "Deployment of either the X-Frame-Options or Content-Security-Policy (with the frame-ancestors directive) header will prevent Clickjacking attacks. While the XFO header is simpler to deploy, the CSP header is more flexible. [Learn more about mitigating Clickjacking with XFO and CSP](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).",
+      "description": "The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header can be used to mitigate clickjacking attacks. While the XFO header is simpler to deploy, the `frame-ancestors` CSP directive is more flexible. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).",
       "score": 1,
       "scoreDisplayMode": "informative",
       "details": {
@@ -2867,14 +2867,6 @@
             "label": "Description"
           },
           {
-            "key": "directive",
-            "valueType": "code",
-            "subItemsHeading": {
-              "key": "directive"
-            },
-            "label": "Directive"
-          },
-          {
             "key": "severity",
             "valueType": "text",
             "subItemsHeading": {
@@ -2886,7 +2878,7 @@
         "items": [
           {
             "severity": "High",
-            "description": "No Clickjacking mitigation found."
+            "description": "No XFO or CSP frame-ancestors found"
           }
         ]
       }
@@ -9828,11 +9820,8 @@
       "core/audits/clickjacking-mitigation.js | description": [
         "audits[clickjacking-mitigation].description"
       ],
-      "core/audits/clickjacking-mitigation.js | columnDirective": [
-        "audits[clickjacking-mitigation].details.headings[1].label"
-      ],
       "core/audits/clickjacking-mitigation.js | columnSeverity": [
-        "audits[clickjacking-mitigation].details.headings[2].label"
+        "audits[clickjacking-mitigation].details.headings[1].label"
       ],
       "core/audits/clickjacking-mitigation.js | noClickjackingMitigation": [
         "audits[clickjacking-mitigation].details.items[0].description"
