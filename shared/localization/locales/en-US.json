@@ -771,7 +771,7 @@
     "message": "No XFO or CSP frame-ancestors found"
   },
   "core/audits/clickjacking-mitigation.js | title": {
-    "message": "Ensure Clickjacking mitigation through XFO or CSP."
+    "message": "Ensure clickjacking mitigation through XFO or CSP."
   },
   "core/audits/critical-request-chains.js | description": {
     "message": "The Critical Request Chains below show you what resources are loaded with a high priority. Consider reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load. [Learn how to avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/)."

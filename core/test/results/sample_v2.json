@@ -2851,7 +2851,7 @@
     },
     "clickjacking-mitigation": {
       "id": "clickjacking-mitigation",
-      "title": "Ensure Clickjacking mitigation through XFO or CSP.",
+      "title": "Ensure clickjacking mitigation through XFO or CSP.",
       "description": "The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header can be used to mitigate clickjacking attacks. While the XFO header is simpler to deploy, the `frame-ancestors` CSP directive is more flexible. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).",
       "score": 1,
       "scoreDisplayMode": "informative",
