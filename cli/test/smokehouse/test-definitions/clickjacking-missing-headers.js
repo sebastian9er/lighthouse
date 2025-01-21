@@ -19,7 +19,7 @@ const expectations = {
         details: {
           items: [
             {
-              description: 'No XFO or CSP frame-ancestors found',
+              description: 'No frame control policy found',
               severity: 'High',
             },
           ],

@@ -118,7 +118,7 @@ it('No CSP and no XFO headers but foo header found', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No XFO or CSP frame-ancestors found');
+      .toBeDisplayString('No frame control policy found');
 });
 
 it('Messed up XFO directive and no CSP present.', async () => {
@@ -145,7 +145,7 @@ it('Messed up XFO directive and no CSP present.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No XFO or CSP frame-ancestors found');
+      .toBeDisplayString('No frame control policy found');
 });
 
 it('Messed up CSP directive and no XFO present.', async () => {
@@ -172,7 +172,7 @@ it('Messed up CSP directive and no XFO present.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No XFO or CSP frame-ancestors found');
+      .toBeDisplayString('No frame control policy found');
 });
 
 it('Messed up CSP and XFO directives.', async () => {
@@ -200,7 +200,7 @@ it('Messed up CSP and XFO directives.', async () => {
   expect(results.notApplicable).toBeFalsy();
   expect(results.details.items[0].severity).toBeDisplayString('High');
   expect(results.details.items[0].description)
-      .toBeDisplayString('No XFO or CSP frame-ancestors found');
+      .toBeDisplayString('No frame control policy found');
 });
 
 describe('getRawCspsAndXfo', () => {
@@ -317,7 +317,7 @@ describe('constructResults', () => {
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
         .toBeDisplayString(
-            'No XFO or CSP frame-ancestors found');
+            'No frame control policy found');
   });
 
   it('returns single item for no XFO and no CSP', () => {
@@ -325,6 +325,6 @@ describe('constructResults', () => {
     expect(score).toEqual(0);
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
-        .toBeDisplayString('No XFO or CSP frame-ancestors found');
+        .toBeDisplayString('No frame control policy found');
   });
 });
