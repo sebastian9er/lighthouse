@@ -9,13 +9,13 @@ import {MainResource} from '../computed/main-resource.js';
 import * as i18n from '../lib/i18n/i18n.js';
 
 const UIStrings = {
-  /** Title of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  title: 'Ensure clickjacking mitigation through XFO or CSP.',
-  /** Description of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed after a user expands the section to see more. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  description: 'The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header can be used to mitigate clickjacking attacks. While the XFO header is simpler to deploy, the `frame-ancestors` CSP directive is more flexible. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).',
-  /** Summary text for the results of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating Clickjacking attacks. This is displayed if there is neither a CSP nor XFO header deployed. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
-  noClickjackingMitigation: 'No XFO or CSP frame-ancestors found',
-  /** Label for a column in a data table; entries will be the severity of an issue with the XFO or CSP header. "XFO" stands for "X-Frame-Options". "CSP" stands for "Content-Security-Policy". */
+  /** Title of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating clickjacking attacks. "XFO" stands for "X-Frame-Options" and should not be translated. "CSP" stands for "Content-Security-Policy" and should not be translated. "clickjacking" should not be translated. */
+  title: 'Mitigate clickjacking with XFO or CSP',
+  /** Description of a Lighthouse audit that evaluates whether the set CSP or XFO header is mitigating clickjacking attacks. This is displayed after a user expands the section to see more. "clickjacking" should not be translated. No character length limits. The last sentence starting with 'Learn' becomes link text to additional documentation. "XFO" stands for "X-Frame-Options" and should not be translated. "CSP" stands for "Content-Security-Policy" and should not be translated. */
+  description: 'The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header control where a page can be embedded. These can mitigate clickjacking attacks by blocking some or all sites from embedding the page. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation).',
+  /** Summary text for the results of a Lighthouse audit that evaluates whether the page is mitigating clickjacking attacks with a frame control policy. This text is displayed if the page does not control how it can be embedded on other pages. */
+  noClickjackingMitigation: 'No frame control policy found',
+  /** Label for a column in a data table; entries will be the severity of an issue with the page's frame control policy. */
   columnSeverity: 'Severity',
 };
 

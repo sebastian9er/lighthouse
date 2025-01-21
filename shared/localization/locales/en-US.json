@@ -765,13 +765,13 @@
     "message": "Severity"
   },
   "core/audits/clickjacking-mitigation.js | description": {
-    "message": "The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header can be used to mitigate clickjacking attacks. While the XFO header is simpler to deploy, the `frame-ancestors` CSP directive is more flexible. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation)."
+    "message": "The `X-Frame-Options` (XFO) header or the `frame-ancestors` directive in the `Content-Security-Policy` (CSP) header control where a page can be embedded. These can mitigate clickjacking attacks by blocking some or all sites from embedding the page. [Learn more about mitigating clickjacking](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation)."
   },
   "core/audits/clickjacking-mitigation.js | noClickjackingMitigation": {
-    "message": "No XFO or CSP frame-ancestors found"
+    "message": "No frame control policy found"
   },
   "core/audits/clickjacking-mitigation.js | title": {
-    "message": "Ensure clickjacking mitigation through XFO or CSP."
+    "message": "Mitigate clickjacking with XFO or CSP"
   },
   "core/audits/critical-request-chains.js | description": {
     "message": "The Critical Request Chains below show you what resources are loaded with a high priority. Consider reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load. [Learn how to avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/)."
