@@ -502,7 +502,7 @@ declare module Artifacts {
   }
 
   interface TraceElement {
-    traceEventType: 'largest-contentful-paint'|'layout-shift'|'animation'|'responsiveness';
+    traceEventType: 'trace-engine'|'largest-contentful-paint'|'layout-shift'|'animation'|'responsiveness';
     node: NodeDetails;
     nodeId: number;
     animations?: {name?: string, failureReasonsMask?: number, unsupportedProperties?: string[]}[];
@@ -541,6 +541,7 @@ declare module Artifacts {
     lowTextContrastIssue: Crdp.Audits.LowTextContrastIssueDetails[];
     mixedContentIssue: Crdp.Audits.MixedContentIssueDetails[];
     navigatorUserAgentIssue: Crdp.Audits.NavigatorUserAgentIssueDetails[];
+    partitioningBlobURLIssue: Crdp.Audits.PartitioningBlobURLIssueDetails[];
     propertyRuleIssue: Crdp.Audits.PropertyRuleIssueDetails[],
     quirksModeIssue: Crdp.Audits.QuirksModeIssueDetails[];
     cookieIssue: Crdp.Audits.CookieIssueDetails[];

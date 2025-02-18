@@ -96,7 +96,8 @@
     "serve-gh-pages": "cd dist/gh-pages && python3 -m http.server 7333",
     "serve-treemap": "yarn serve-gh-pages",
     "serve-viewer": "yarn serve-gh-pages",
-    "flow-report": "yarn build-report --flow && node ./core/scripts/build-test-flow-report.js"
+    "flow-report": "yarn build-report --flow && node ./core/scripts/build-test-flow-report.js",
+    "generate-insight-audits": "node core/scripts/generate-insight-audits.js"
   },
   "devDependencies": {
     "@build-tracker/cli": "^1.0.0-beta.15",
@@ -167,7 +168,7 @@
     "pako": "^2.0.3",
     "preact": "^10.7.2",
     "pretty-json-stringify": "^0.0.2",
-    "puppeteer": "^23.10.4",
+    "puppeteer": "^24.1.1",
     "resolve": "^1.22.1",
     "rollup": "^2.52.7",
     "rollup-plugin-polyfill-node": "^0.12.0",
@@ -181,13 +182,13 @@
     "webtreemap-cdt": "^3.2.1"
   },
   "dependencies": {
-    "@paulirish/trace_engine": "0.0.39",
+    "@paulirish/trace_engine": "0.0.44",
     "@sentry/node": "^7.0.0",
     "axe-core": "^4.10.2",
     "chrome-launcher": "^1.1.2",
     "configstore": "^5.0.1",
     "csp_evaluator": "1.1.1",
-    "devtools-protocol": "0.0.1402036",
+    "devtools-protocol": "0.0.1419081",
     "enquirer": "^2.3.6",
     "http-link-header": "^1.1.1",
     "intl-messageformat": "^10.5.3",
@@ -201,19 +202,19 @@
     "metaviewport-parser": "0.3.0",
     "open": "^8.4.0",
     "parse-cache-control": "1.0.1",
-    "puppeteer-core": "^23.10.4",
+    "puppeteer-core": "^24.1.1",
     "robots-parser": "^3.0.1",
     "semver": "^5.3.0",
     "speedline-core": "^1.4.3",
-    "third-party-web": "^0.26.1",
+    "third-party-web": "^0.26.5",
     "tldts-icann": "^6.1.16",
     "ws": "^7.0.0",
     "yargs": "^17.3.1",
     "yargs-parser": "^21.0.0"
   },
   "resolutions": {
-    "puppeteer/**/devtools-protocol": "0.0.1402036",
-    "puppeteer-core/**/devtools-protocol": "0.0.1402036"
+    "puppeteer/**/devtools-protocol": "0.0.1419081",
+    "puppeteer-core/**/devtools-protocol": "0.0.1419081"
   },
   "repository": "GoogleChrome/lighthouse",
   "keywords": [
