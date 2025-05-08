@@ -4,14 +4,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import * as ImageDeliveryInsightModule from '@paulirish/trace_engine/models/trace/insights/ImageDelivery.js';
 import {UIStrings} from '@paulirish/trace_engine/models/trace/insights/ImageDelivery.js';
 
 import {Audit} from '../audit.js';
 import * as i18n from '../../lib/i18n/i18n.js';
 import {adaptInsightToAuditProduct} from './insight-audit.js';
+import {TraceEngineResult} from '../../computed/trace-engine-result.js';
 
 // eslint-disable-next-line max-len
 const str_ = i18n.createIcuMessageFn('node_modules/@paulirish/trace_engine/models/trace/insights/ImageDelivery.js', UIStrings);
+
+const getOptimizationMessage =
+  TraceEngineResult.localizeFunction(str_, ImageDeliveryInsightModule.getOptimizationMessage);
 
 class ImageDeliveryInsight extends Audit {
   /**
@@ -24,7 +29,13 @@ class ImageDeliveryInsight extends Audit {
       failureTitle: str_(UIStrings.title),
       description: str_(UIStrings.description),
       guidanceLevel: 3,
-      requiredArtifacts: ['traces', 'TraceElements'],
+      requiredArtifacts: ['Trace', 'TraceElements', 'SourceMaps'],
+      replacesAudits: [
+        'modern-image-formats',
+        'uses-optimized-images',
+        'efficient-animated-content',
+        'uses-responsive-images',
+      ],
     };
   }
 
@@ -39,10 +50,6 @@ class ImageDeliveryInsight extends Audit {
         // TODO: show UIStrings.noOptimizableImages?
         return;
       }
-
-      const relatedEventsMap = insight.relatedEvents && !Array.isArray(insight.relatedEvents) ?
-        insight.relatedEvents :
-        null;
 
       /** @type {LH.Audit.Details.Table['headings']} */
       const headings = [
@@ -60,11 +67,9 @@ class ImageDeliveryInsight extends Audit {
         wastedBytes: image.byteSavings,
         subItems: {
           type: /** @type {const} */ ('subitems'),
-          // TODO: when strings update to remove number from "reason" uistrings, update this
-          // to use `image.optimizations.map(...)` and construct strings from the type.
-          items: (relatedEventsMap?.get(image.request) ?? []).map((reason, i) => ({
-            reason,
-            wastedBytes: image.optimizations[i].byteSavings,
+          items: image.optimizations.map(optimization => ({
+            reason: getOptimizationMessage(optimization),
+            wastedBytes: optimization.byteSavings,
           })),
         },
       }));

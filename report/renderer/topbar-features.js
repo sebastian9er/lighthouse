@@ -114,14 +114,6 @@ export class TopbarFeatures {
         toggleDarkTheme(this._dom);
         break;
       }
-      case 'toggle-insights': {
-        const insightsGroup = this._dom.find('.lh-perf-audits--experimental');
-        insightsGroup.classList.toggle('lh-hidden');
-
-        const diagnosticsGroup = this._dom.find('.lh-perf-audits--legacy');
-        diagnosticsGroup.classList.toggle('lh-hidden');
-        break;
-      }
       case 'view-unthrottled-trace': {
         this._reportUIFeatures._opts.onViewTrace?.();
       }
@@ -154,8 +146,7 @@ export class TopbarFeatures {
    */
   onCopyButtonClick() {
     this._dom.fireEventOn('lh-analytics', this._dom.document(), {
-      cmd: 'send',
-      fields: {hitType: 'event', eventCategory: 'report', eventAction: 'copy'},
+      name: 'copy',
     });
 
     try {

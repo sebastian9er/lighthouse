@@ -7,7 +7,6 @@
 import {Protocol as Crdp} from 'devtools-protocol/types/protocol.js';
 import * as TraceEngine from '@paulirish/trace_engine';
 import * as Lantern from '../core/lib/lantern/lantern.js';
-import {LayoutShiftRootCausesData} from '@paulirish/trace_engine/models/trace/root-causes/LayoutShift.js';
 
 import {parseManifest} from '../core/lib/manifest-parser.js';
 import {LighthouseError} from '../core/lib/lh-error.js';
@@ -138,8 +137,6 @@ export interface GathererArtifacts extends PublicGathererArtifacts {
   ResponseCompression: {requestId: string, url: string, mimeType: string, transferSize: number, resourceSize: number, gzipSize?: number}[];
   /** Information on fetching and the content of the /robots.txt file. */
   RobotsTxt: {status: number|null, content: string|null, errorMessage?: string};
-  /** The result of calling the shared trace engine root cause analysis. */
-  RootCauses: Artifacts.TraceEngineRootCauses;
   /** Source maps of scripts executed in the page. */
   SourceMaps: Array<Artifacts.SourceMap>;
   /** Information on detected tech stacks (e.g. JS libraries) used by the page. */
@@ -515,7 +512,7 @@ declare module Artifacts {
   }
 
   interface TraceEngineRootCauses {
-    layoutShifts: Record<number, LayoutShiftRootCausesData>;
+    layoutShifts: Map<TraceEngine.Types.Events.SyntheticLayoutShift, TraceEngine.Insights.Models.CLSCulprits.LayoutShiftRootCausesData>;
   }
 
   interface ViewportDimensions {
@@ -548,6 +545,7 @@ declare module Artifacts {
     selectElementAccessibilityIssue: Crdp.Audits.SelectElementAccessibilityIssueDetails[];
     sharedArrayBufferIssue: Crdp.Audits.SharedArrayBufferIssueDetails[];
     sharedDictionaryIssue: Crdp.Audits.SharedDictionaryIssueDetails[];
+    sriMessageSignatureIssue: Crdp.Audits.SRIMessageSignatureIssueDetails[];
     stylesheetLoadingIssue: Crdp.Audits.StylesheetLoadingIssueDetails[];
     federatedAuthUserInfoRequestIssue: Crdp.Audits.FederatedAuthUserInfoRequestIssueDetails[];
   }
@@ -567,8 +565,9 @@ declare module Artifacts {
     trace: Trace;
     settings: Audit.Context['settings'];
     gatherContext: Artifacts['GatherContext'];
-    simulator?: Gatherer.Simulation.Simulator;
+    simulator: Gatherer.Simulation.Simulator | null;
     URL: Artifacts['URL'];
+    SourceMaps: Artifacts['SourceMaps'];
   }
 
   interface MetricComputationData extends MetricComputationDataInput {

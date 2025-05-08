@@ -5,6 +5,7 @@
  */
 
 import {UIStrings} from '@paulirish/trace_engine/models/trace/insights/ThirdParties.js';
+import {summarizeByURL} from '@paulirish/trace_engine/models/trace/extras/ThirdParties.js';
 
 import {Audit} from '../audit.js';
 import * as i18n from '../../lib/i18n/i18n.js';
@@ -31,23 +32,23 @@ class ThirdPartiesInsight extends Audit {
       failureTitle: str_(UIStrings.title),
       description: str_(UIStrings.description),
       guidanceLevel: 3,
-      requiredArtifacts: ['traces', 'TraceElements'],
+      requiredArtifacts: ['Trace', 'TraceElements', 'SourceMaps'],
+      replacesAudits: ['third-party-summary'],
     };
   }
 
   /**
    * @param {LH.Artifacts.Entity} entity
-   * @param {import('@paulirish/trace_engine/models/trace/insights/ThirdParties.js').ThirdPartiesInsightModel} insight
-   * @return {Array<URLSummary>}
+   * @param {import('@paulirish/trace_engine/models/trace/extras/ThirdParties.js').URLSummary[]} urlSummaries
+   * @return {URLSummary[]}
    */
-  static makeSubItems(entity, insight) {
-    const urls = [...insight.urlsByEntity.get(entity) ?? []];
-    return urls
-      .map(url => ({
-        url,
-        mainThreadTime: 0,
-        transferSize: 0,
-        ...insight.summaryByUrl.get(url),
+  static makeSubItems(entity, urlSummaries) {
+    urlSummaries = urlSummaries.filter(s => s.entity === entity);
+    return urlSummaries.filter(s => s.entity === entity)
+      .map(s => ({
+        url: s.url,
+        mainThreadTime: s.mainThreadTime,
+        transferSize: s.transferSize,
       }))
       // Sort by main thread time first, then transfer size to break ties.
       .sort((a, b) => (b.mainThreadTime - a.mainThreadTime) || (b.transferSize - a.transferSize));
@@ -59,9 +60,12 @@ class ThirdPartiesInsight extends Audit {
    * @return {Promise<LH.Audit.Product>}
    */
   static async audit(artifacts, context) {
-    return adaptInsightToAuditProduct(artifacts, context, 'ThirdParties', (insight) => {
-      const thirdPartyEntities = [...insight.summaryByEntity.entries()]
-        .filter((([entity, _]) => entity !== insight.firstPartyEntity));
+    return adaptInsightToAuditProduct(artifacts, context, 'ThirdParties', (insight, extras) => {
+      const urlSummaries = summarizeByURL(extras.parsedTrace, extras.insights.bounds);
+
+      const thirdPartySummaries = insight.entitySummaries
+        .filter(summary => summary.entity !== insight.firstPartyEntity || null)
+        .sort((a, b) => b.mainThreadTime - a.mainThreadTime);
 
       /** @type {LH.Audit.Details.Table['headings']} */
       const headings = [
@@ -72,15 +76,17 @@ class ThirdPartiesInsight extends Audit {
         /* eslint-enable max-len */
       ];
       /** @type {LH.Audit.Details.Table['items']} */
-      const items = thirdPartyEntities.map(([entity, summary]) => ({
-        entity: entity.name,
-        transferSize: summary.transferSize,
-        mainThreadTime: summary.mainThreadTime,
-        subItems: {
-          type: /** @type {const} */ ('subitems'),
-          items: ThirdPartiesInsight.makeSubItems(entity, insight),
-        },
-      }));
+      const items = thirdPartySummaries.map((summary) => {
+        return {
+          entity: summary.entity.name,
+          mainThreadTime: summary.mainThreadTime,
+          transferSize: summary.transferSize,
+          subItems: {
+            type: /** @type {const} */ ('subitems'),
+            items: ThirdPartiesInsight.makeSubItems(summary.entity, urlSummaries),
+          },
+        };
+      });
       return Audit.makeTableDetails(headings, items, {isEntityGrouped: true});
     });
   }
