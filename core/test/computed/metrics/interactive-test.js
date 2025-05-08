@@ -11,6 +11,8 @@ import {getURLArtifactFromDevtoolsLog, loadTraceFixture} from '../../test-utils.
 
 const {trace, devtoolsLog} = loadTraceFixture('progressive-app');
 const URL = getURLArtifactFromDevtoolsLog(devtoolsLog);
+/** @type {LH.Artifacts['SourceMaps']} */
+const SourceMaps = [];
 
 /**
  * Simple wrapper to just coerce return type to LanternMetric.
@@ -53,7 +55,8 @@ describe('Metrics: TTI', () => {
       {throttlingMethod: 'simulate'}
     );
     const context = {settings, computedCache: new Map()};
-    const result = await getResult({trace, devtoolsLog, gatherContext, settings, URL}, context);
+    // eslint-disable-next-line max-len
+    const result = await getResult({trace, devtoolsLog, gatherContext, settings, URL, SourceMaps, simulator: null}, context);
 
     expect({
       timing: Math.round(result.timing),
@@ -71,8 +74,8 @@ describe('Metrics: TTI', () => {
       {throttlingMethod: 'provided', formFactor: 'desktop'}
     );
     const context = {settings, computedCache: new Map()};
-    const result = await getResult({trace, devtoolsLog, gatherContext, settings, URL},
-      context);
+    // eslint-disable-next-line max-len
+    const result = await getResult({trace, devtoolsLog, gatherContext, settings, URL, SourceMaps, simulator: null}, context);
 
     assert.equal(Math.round(result.timing), 224);
     assert.equal(result.timestamp, 376406205074);
@@ -83,8 +86,8 @@ describe('Metrics: TTI', () => {
       {throttlingMethod: 'provided', formFactor: 'mobile'}
     );
     const context = {settings, computedCache: new Map()};
-    const result = await getResult({trace, devtoolsLog, gatherContext, settings, URL},
-      context);
+    // eslint-disable-next-line max-len
+    const result = await getResult({trace, devtoolsLog, gatherContext, settings, URL, SourceMaps, simulator: null}, context);
 
     assert.equal(Math.round(result.timing), 224);
     assert.equal(result.timestamp, 376406205074);

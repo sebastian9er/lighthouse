@@ -30,7 +30,7 @@ const UIStrings = {
 
 const str_ = i18n.createIcuMessageFn(import.meta.url, UIStrings);
 
-const IGNORE_THRESHOLD_IN_BYTES = 1024;
+const IGNORE_THRESHOLD_IN_BYTES = 1024 * 10;
 
 /**
  * @param {string} haystack
@@ -53,7 +53,7 @@ class DuplicatedJavascript extends ByteEfficiencyAudit {
       description: str_(UIStrings.description),
       scoreDisplayMode: ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS,
       guidanceLevel: 2,
-      requiredArtifacts: ['devtoolsLogs', 'traces', 'SourceMaps', 'Scripts',
+      requiredArtifacts: ['DevtoolsLog', 'Trace', 'SourceMaps', 'Scripts',
         'GatherContext', 'URL'],
     };
   }

@@ -23,8 +23,8 @@ import {LighthouseError} from '../../lib/lh-error.js';
 import {Responsiveness} from '../../computed/metrics/responsiveness.js';
 import {CumulativeLayoutShift} from '../../computed/metrics/cumulative-layout-shift.js';
 import {ExecutionContext} from '../driver/execution-context.js';
-import RootCauses from './root-causes.js';
 import {TraceEngineResult} from '../../computed/trace-engine-result.js';
+import SourceMaps from './source-maps.js';
 
 /** @typedef {{nodeId: number, animations?: {name?: string, failureReasonsMask?: number, unsupportedProperties?: string[]}[], type?: string}} TraceElementData */
 
@@ -46,10 +46,10 @@ function getNodeDetailsData() {
 /* c8 ignore stop */
 
 class TraceElements extends BaseGatherer {
-  /** @type {LH.Gatherer.GathererMeta<'Trace'|'RootCauses'>} */
+  /** @type {LH.Gatherer.GathererMeta<'Trace'|'SourceMaps'>} */
   meta = {
     supportedModes: ['timespan', 'navigation'],
-    dependencies: {Trace: Trace.symbol, RootCauses: RootCauses.symbol},
+    dependencies: {Trace: Trace.symbol, SourceMaps: SourceMaps.symbol},
   };
 
   /** @type {Map<string, string>} */
@@ -103,13 +103,23 @@ class TraceElements extends BaseGatherer {
       seen.add(obj);
 
       if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
-        Object.keys(obj).forEach(key => {
-          if (typeof obj[key] === 'object') {
-            recursiveObjectEnumerate(obj[key], cb, seen);
-          } else {
-            cb(obj, key);
+        if (obj instanceof Map) {
+          for (const [key, val] of obj) {
+            if (typeof val === 'object') {
+              recursiveObjectEnumerate(val, cb, seen);
+            } else {
+              cb(val, key);
+            }
           }
-        });
+        } else {
+          Object.keys(obj).forEach(key => {
+            if (typeof obj[key] === 'object') {
+              recursiveObjectEnumerate(obj[key], cb, seen);
+            } else {
+              cb(obj[key], key);
+            }
+          });
+        }
       } else if (Array.isArray(obj)) {
         obj.forEach(item => {
           if (typeof item === 'object' || Array.isArray(item)) {
@@ -121,11 +131,17 @@ class TraceElements extends BaseGatherer {
 
     /** @type {number[]} */
     const nodeIds = [];
-    recursiveObjectEnumerate(insightSet.model, (obj, key) => {
-      if (typeof obj[key] === 'number' && (key === 'nodeId' || key === 'node_id')) {
-        nodeIds.push(obj[key]);
+    recursiveObjectEnumerate(insightSet.model, (val, key) => {
+      const keys = ['nodeId', 'node_id', 'backendNodeId'];
+      if (typeof val === 'number' && keys.includes(key)) {
+        nodeIds.push(val);
       }
     }, new Set());
+
+    // TODO: handle digging into Map in recursiveObjectEnumerate.
+    for (const shift of insightSet.model.CLSCulprits.shifts.values()) {
+      nodeIds.push(...shift.unsizedImages.map(s => s.backendNodeId));
+    }
 
     return [...new Set(nodeIds)].map(id => ({nodeId: id}));
   }
@@ -188,11 +204,10 @@ class TraceElements extends BaseGatherer {
    *
    * @param {LH.Trace} trace
    * @param {LH.Artifacts.TraceEngineResult['data']} traceEngineResult
-   * @param {LH.Artifacts.TraceEngineRootCauses} rootCauses
    * @param {LH.Gatherer.Context} context
    * @return {Promise<Array<{nodeId: number}>>}
    */
-  static async getTopLayoutShifts(trace, traceEngineResult, rootCauses, context) {
+  static async getTopLayoutShifts(trace, traceEngineResult, context) {
     const {impactByNodeId} = await CumulativeLayoutShift.request(trace, context);
     const clusters = traceEngineResult.LayoutShifts.clusters ?? [];
     const layoutShiftEvents =
@@ -210,14 +225,6 @@ class TraceElements extends BaseGatherer {
           this.getBiggestImpactNodeForShiftEvent(impactedNodes, impactByNodeId, event);
         if (biggestImpactedNodeId !== undefined) {
           nodeIds.push(biggestImpactedNodeId);
-        }
-
-        const index = layoutShiftEvents.indexOf(event);
-        const shiftRootCauses = rootCauses.layoutShifts[index];
-        if (shiftRootCauses) {
-          for (const cause of shiftRootCauses.unsizedMedia) {
-            nodeIds.push(cause.node.backendNodeId);
-          }
         }
 
         return nodeIds.map(nodeId => ({nodeId}));
@@ -372,15 +379,17 @@ class TraceElements extends BaseGatherer {
   }
 
   /**
-   * @param {LH.Gatherer.Context<'Trace'|'RootCauses'>} context
+   * @param {LH.Gatherer.Context<'Trace'|'SourceMaps'>} context
    * @return {Promise<LH.Artifacts.TraceElement[]>}
    */
   async getArtifact(context) {
     const session = context.driver.defaultSession;
 
     const trace = context.dependencies.Trace;
-    const traceEngineResult = await TraceEngineResult.request({trace}, context);
-    const rootCauses = context.dependencies.RootCauses;
+    const SourceMaps = context.dependencies.SourceMaps;
+    const settings = context.settings;
+    const traceEngineResult =
+      await TraceEngineResult.request({trace, settings, SourceMaps}, context);
 
     const processedTrace = await ProcessedTrace.request(trace, context);
     const {mainThreadEvents} = processedTrace;
@@ -390,7 +399,7 @@ class TraceElements extends BaseGatherer {
       traceEngineResult, navigationId);
     const lcpNodeData = await TraceElements.getLcpElement(trace, context);
     const shiftsData = await TraceElements.getTopLayoutShifts(
-      trace, traceEngineResult.data, rootCauses, context);
+      trace, traceEngineResult.data, context);
     const animatedElementData = await this.getAnimatedElements(mainThreadEvents);
     const responsivenessElementData = await TraceElements.getResponsivenessElement(trace, context);
 

@@ -67,13 +67,15 @@ class ReportUtils {
 
         // attach the stackpacks to the auditRef object
         if (clone.stackPacks) {
+          const ids = [auditRef.id, ...auditRef.result.replacesAudits ?? []];
           clone.stackPacks.forEach(pack => {
-            if (pack.descriptions[auditRef.id]) {
+            const id = ids.find(id => pack.descriptions[id]);
+            if (id && pack.descriptions[id]) {
               auditRef.stackPacks = auditRef.stackPacks || [];
               auditRef.stackPacks.push({
                 title: pack.title,
                 iconDataURL: pack.iconDataURL,
-                description: pack.descriptions[auditRef.id],
+                description: pack.descriptions[id],
               });
             }
           });
@@ -418,8 +420,6 @@ const UIStrings = {
   dropdownSaveGist: 'Save as Gist',
   /** Option in a dropdown menu that toggles the themeing of the report between Light(default) and Dark themes. */
   dropdownDarkTheme: 'Toggle Dark Theme',
-  /** Option in a dropdown menu that toggles the type of performance insights displayed. */
-  dropdownInsightsToggle: 'Toggle experimental insights',
   /** Option in a dropdown menu that opens the trace of the page without throttling. "Unthrottled" can be replaced with "Original". */
   dropdownViewUnthrottledTrace: 'View Unthrottled Trace',
 
@@ -481,6 +481,13 @@ const UIStrings = {
   openInANewTabTooltip: 'Open in a new tab',
   /** Generic category name for all resources that could not be attributed to a 1st or 3rd party entity. */
   unattributable: 'Unattributable',
+
+  /** Notice about upcoming planned changes to Lighthouse, to replace most performance audits with a new set of "insight" audits. */
+  insightsNotice: 'Later this year, insights will replace performance audits. [Learn more and provide feedback here](https://github.com/GoogleChrome/lighthouse/discussions/16462).',
+  /** Text for a button to try out "Performance insight audits", a new set of performance advice that will replace performance audits. */
+  tryInsights: 'Try insights',
+  /** Text for a button for going back to normal "Performance audits", instead of using the new set of performance insight audits that will replace performance audits. */
+  goBackToAudits: 'Go back to audits',
 };
 
 export {
