@@ -1,5 +1,5 @@
 {
-  "lighthouseVersion": "12.6.0",
+  "lighthouseVersion": "12.6.1",
   "requestedUrl": "http://localhost:10200/dobetterweb/dbw_tester.html",
   "mainDocumentUrl": "http://localhost:10200/dobetterweb/dbw_tester.html",
   "finalDisplayedUrl": "http://localhost:10200/dobetterweb/dbw_tester.html",
@@ -9,7 +9,7 @@
   "runWarnings": [],
   "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
   "environment": {
-    "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36",
+    "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
     "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
     "benchmarkIndex": 3082.5,
     "credits": {
@@ -4386,7 +4386,7 @@
           {
             "key": "wastedMs",
             "valueType": "timespanMs",
-            "label": "Est Savings"
+            "label": "Duration"
           }
         ],
         "items": [
@@ -6624,7 +6624,7 @@
           {
             "key": "wastedMs",
             "valueType": "timespanMs",
-            "label": "Est Savings"
+            "label": "Duration"
           }
         ],
         "items": [
@@ -6731,7 +6731,7 @@
       "deviceScaleFactor": 1.75,
       "disabled": false
     },
-    "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36",
+    "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
     "auditMode": true,
     "gatherMode": false,
     "clearStorageTypes": [
@@ -10611,7 +10611,9 @@
       "core/lib/i18n/i18n.js | columnDuration": [
         "audits[user-timings].details.headings[3].label",
         "audits[long-tasks].details.headings[2].label",
-        "audits[lcp-phases-insight].details.items[0].headings[1].label"
+        "audits[render-blocking-resources].details.headings[2].label",
+        "audits[lcp-phases-insight].details.items[0].headings[1].label",
+        "audits[render-blocking-insight].details.headings[2].label"
       ],
       "core/audits/critical-request-chains.js | title": [
         "audits[critical-request-chains].title"
@@ -10941,7 +10943,6 @@
       ],
       "core/lib/i18n/i18n.js | columnWastedBytes": [
         "audits[prioritize-lcp-image].details.headings[2].label",
-        "audits[render-blocking-resources].details.headings[2].label",
         "audits[unminified-javascript].details.headings[2].label",
         "audits[unused-javascript].details.headings[2].label",
         "audits[modern-image-formats].details.headings[3].label",
@@ -10949,8 +10950,7 @@
         "audits[uses-responsive-images].details.headings[3].label",
         "audits[efficient-animated-content].details.headings[2].label",
         "audits[legacy-javascript].details.headings[2].label",
-        "audits[image-delivery-insight].details.headings[2].label",
-        "audits[render-blocking-insight].details.headings[2].label"
+        "audits[image-delivery-insight].details.headings[2].label"
       ],
       "core/audits/csp-xss.js | title": [
         "audits[csp-xss].title"
