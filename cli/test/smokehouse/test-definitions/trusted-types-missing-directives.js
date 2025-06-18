@@ -20,7 +20,7 @@ const expectations = {
         details: {
           items: [
             {
-              description: 'No Content-Security-Policy header with Trusted Types directive found',
+              description: 'No `Content-Security-Policy` header with Trusted Types directive found',
               severity: 'High',
             },
           ],

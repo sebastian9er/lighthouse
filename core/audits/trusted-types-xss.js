@@ -8,6 +8,7 @@ import {Audit} from './audit.js';
 import {MainResource} from '../computed/main-resource.js';
 import * as i18n from '../lib/i18n/i18n.js';
 import {parseCsp} from '../lib/csp-evaluator.js';
+import { Directive } from 'csp_evaluator/dist/csp.js';
 
 const UIStrings = {
   /** Title of a Lighthouse audit that evaluates whether the set CSP header and Trusted Types directive is mitigating DOM-based XSS. "CSP" stands for "Content-Security-Policy" and should not be translated. "XSS" stands for "Cross Site Scripting" and should not be translated. */
@@ -83,14 +84,11 @@ class TrustedTypesXss extends Audit {
     const rawCsps = [...cspHeaders, ...cspMetaTags];
     const parsedCsps = rawCsps.map(parseCsp);
 
-    for (const pc of parsedCsps) {
-
-    }
-
     // Check for require-trusted-types-for 'script' in CSP.
-    for (const directive of rawCsps) {
-      if (directive.includes('require-trusted-types-for') &&
-          directive.includes('script')) {
+    for (const pc of parsedCsps) {
+      const directiveValues = pc.directives[pc.getEffectiveDirective(
+                                  Directive.REQUIRE_TRUSTED_TYPES_FOR)] || [];
+      if (directiveValues.includes('\'script\'')) {
         return {score: 1, results: []};
       }
     }
