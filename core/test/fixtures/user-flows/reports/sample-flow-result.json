@@ -2265,7 +2265,7 @@
           "trusted-types-xss": {
             "id": "trusted-types-xss",
             "title": "Mitigate DOM-based XSS with Trusted Types",
-            "description": "The `require-trusted-types-for` directive in the `Content-Security-Policy` (CSP) header instructs user agents to control the data passed to DOM XSS sink functions. [Learn more about mitigating DOM-based XSS](https://developer.chrome.com/docs/lighthouse/best-practices/TODO).",
+            "description": "The `require-trusted-types-for` directive in the `Content-Security-Policy` (CSP) header instructs user agents to control the data passed to DOM XSS sink functions. [Learn more about mitigating DOM-based XSS with Trusted Types](https://web.dev/articles/trusted-types).",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -2291,7 +2291,7 @@
               "items": [
                 {
                   "severity": "High",
-                  "description": "No Content-Security-Policy header with Trusted Types directive found"
+                  "description": "No `Content-Security-Policy` header with Trusted Types directive found"
                 }
               ]
             }
@@ -4705,7 +4705,7 @@
                   "value": true
                 },
                 "serverResponseIsFast": {
-                  "label": "Server responds quickly (observed 40 ms) ",
+                  "label": "Server responds quickly",
                   "value": true
                 },
                 "usesCompression": {
@@ -5007,7 +5007,7 @@
           "legacy-javascript-insight": {
             "id": "legacy-javascript-insight",
             "title": "Legacy JavaScript",
-            "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
+            "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
             "score": null,
             "scoreDisplayMode": "notApplicable",
             "details": {
@@ -5096,7 +5096,7 @@
           "render-blocking-insight": {
             "id": "render-blocking-insight",
             "title": "Render blocking requests",
-            "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources) can move these network requests out of the critical path.",
+            "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources/) can move these network requests out of the critical path.",
             "score": null,
             "scoreDisplayMode": "notApplicable",
             "details": {
@@ -5128,7 +5128,7 @@
           "third-parties-insight": {
             "id": "third-parties-insight",
             "title": "3rd parties",
-            "description": "3rd party code can significantly impact load performance. [Reduce and defer loading of 3rd party code](https://web.dev/articles/optimizing-content-efficiency-loading-third-party-javascript/) to prioritize your page's content.",
+            "description": "3rd party code can significantly impact load performance. [Reduce and defer loading of 3rd party code](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/) to prioritize your page's content.",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -7839,13 +7839,13 @@
             },
             {
               "startTime": 161,
-              "name": "lh:computed:TraceEngineResult:parse:Workers:finalize",
+              "name": "lh:computed:TraceEngineResult:parse:Warnings:finalize",
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 162,
-              "name": "lh:computed:TraceEngineResult:parse:Warnings:finalize",
+              "name": "lh:computed:TraceEngineResult:parse:Workers:finalize",
               "duration": 1,
               "entryType": "measure"
             },
@@ -9136,7 +9136,8 @@
               "audits[csp-xss].details.headings[0].label",
               "audits[has-hsts].details.headings[0].label",
               "audits[origin-isolation].details.headings[0].label",
-              "audits[clickjacking-mitigation].details.headings[0].label"
+              "audits[clickjacking-mitigation].details.headings[0].label",
+              "audits[trusted-types-xss].details.headings[0].label"
             ],
             "core/audits/server-response-time.js | title": [
               "audits[server-response-time].title"
@@ -10310,12 +10311,7 @@
               "audits[document-latency-insight].details.items.noRedirects.label"
             ],
             "node_modules/@paulirish/trace_engine/models/trace/insights/DocumentLatency.js | passingServerResponseTime": [
-              {
-                "values": {
-                  "PH1": "40 ms"
-                },
-                "path": "audits[document-latency-insight].details.items.serverResponseIsFast.label"
-              }
+              "audits[document-latency-insight].details.items.serverResponseIsFast.label"
             ],
             "node_modules/@paulirish/trace_engine/models/trace/insights/DocumentLatency.js | passingTextCompression": [
               "audits[document-latency-insight].details.items.usesCompression.label"
@@ -13374,7 +13370,7 @@
           "legacy-javascript-insight": {
             "id": "legacy-javascript-insight",
             "title": "Legacy JavaScript",
-            "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
+            "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
             "score": null,
             "scoreDisplayMode": "notApplicable",
             "details": {
@@ -13455,7 +13451,7 @@
           "render-blocking-insight": {
             "id": "render-blocking-insight",
             "title": "Render blocking requests",
-            "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources) can move these network requests out of the critical path.",
+            "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources/) can move these network requests out of the critical path.",
             "score": null,
             "scoreDisplayMode": "notApplicable",
             "details": {
@@ -13487,7 +13483,7 @@
           "third-parties-insight": {
             "id": "third-parties-insight",
             "title": "3rd parties",
-            "description": "3rd party code can significantly impact load performance. [Reduce and defer loading of 3rd party code](https://web.dev/articles/optimizing-content-efficiency-loading-third-party-javascript/) to prioritize your page's content.",
+            "description": "3rd party code can significantly impact load performance. [Reduce and defer loading of 3rd party code](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/) to prioritize your page's content.",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -14859,13 +14855,13 @@
             },
             {
               "startTime": 105,
-              "name": "lh:computed:TraceEngineResult:parse:Workers:finalize",
+              "name": "lh:computed:TraceEngineResult:parse:Warnings:finalize",
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 106,
-              "name": "lh:computed:TraceEngineResult:parse:Warnings:finalize",
+              "name": "lh:computed:TraceEngineResult:parse:Workers:finalize",
               "duration": 1,
               "entryType": "measure"
             },
@@ -24360,7 +24356,7 @@
           "trusted-types-xss": {
             "id": "trusted-types-xss",
             "title": "Mitigate DOM-based XSS with Trusted Types",
-            "description": "The `require-trusted-types-for` directive in the `Content-Security-Policy` (CSP) header instructs user agents to control the data passed to DOM XSS sink functions. [Learn more about mitigating DOM-based XSS](https://developer.chrome.com/docs/lighthouse/best-practices/TODO).",
+            "description": "The `require-trusted-types-for` directive in the `Content-Security-Policy` (CSP) header instructs user agents to control the data passed to DOM XSS sink functions. [Learn more about mitigating DOM-based XSS with Trusted Types](https://web.dev/articles/trusted-types).",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -24386,7 +24382,7 @@
               "items": [
                 {
                   "severity": "High",
-                  "description": "No Content-Security-Policy header with Trusted Types directive found"
+                  "description": "No `Content-Security-Policy` header with Trusted Types directive found"
                 }
               ]
             }
@@ -26916,7 +26912,7 @@
                   "value": true
                 },
                 "serverResponseIsFast": {
-                  "label": "Server responds quickly (observed 27 ms) ",
+                  "label": "Server responds quickly",
                   "value": true
                 },
                 "usesCompression": {
@@ -27106,7 +27102,7 @@
             "displayValue": "Est savings of 90 KiB",
             "metricSavings": {
               "FCP": 0,
-              "LCP": 600
+              "LCP": 500
             },
             "details": {
               "type": "table",
@@ -27275,7 +27271,7 @@
           "legacy-javascript-insight": {
             "id": "legacy-javascript-insight",
             "title": "Legacy JavaScript",
-            "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
+            "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
             "score": null,
             "scoreDisplayMode": "notApplicable",
             "details": {
@@ -27336,7 +27332,7 @@
             "id": "network-dependency-tree-insight",
             "title": "Network dependency tree",
             "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load.",
-            "score": 0,
+            "score": 1,
             "scoreDisplayMode": "numeric",
             "metricSavings": {
               "LCP": 0
@@ -27349,14 +27345,7 @@
                   "navStartToEndTime": 185,
                   "transferSize": 3612,
                   "isLongest": true,
-                  "children": {
-                    "27446.102": {
-                      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-RTW9M3W5HC&gtm=45je5230v9102781914za200&_p=1738719102855&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=102067808~102081485~102123608~102482432~102539968~102558064&cid=974257356.1738719103&ul=en-us&sr=412x823&uaa=&uab=64&uafvl=Chromium%3B134.0.6998.0%7CNot%253AA-Brand%3B24.0.0.0%7CGoogle%2520Chrome%3B134.0.6998.0&uamb=1&uam=moto%20g%20power%20(2022)&uap=Android&uapv=11.0&uaw=0&are=1&frm=0&pscdl=noapi&_s=5&sid=1738719103&sct=1&seg=1&dl=https%3A%2F%2Fwww.mikescerealshack.co%2Fsearch%3Fq%3Dcall%2Bof%2Bduty&dr=https%3A%2F%2Fwww.mikescerealshack.co%2F&dt=%22call%20of%20duty%22%20Results%20-%20Mike%27s%20Cereal%20Shack%3A%20The%20Office%20Search%20Engine&en=user_engagement&_et=9757&tfd=19216",
-                      "navStartToEndTime": 177,
-                      "transferSize": 0,
-                      "children": {}
-                    }
-                  }
+                  "children": {}
                 }
               },
               "longestChain": {
@@ -27371,7 +27360,7 @@
           "render-blocking-insight": {
             "id": "render-blocking-insight",
             "title": "Render blocking requests",
-            "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources) can move these network requests out of the critical path.",
+            "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources/) can move these network requests out of the critical path.",
             "score": null,
             "scoreDisplayMode": "notApplicable",
             "details": {
@@ -27403,7 +27392,7 @@
           "third-parties-insight": {
             "id": "third-parties-insight",
             "title": "3rd parties",
-            "description": "3rd party code can significantly impact load performance. [Reduce and defer loading of 3rd party code](https://web.dev/articles/optimizing-content-efficiency-loading-third-party-javascript/) to prioritize your page's content.",
+            "description": "3rd party code can significantly impact load performance. [Reduce and defer loading of 3rd party code](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/) to prioritize your page's content.",
             "score": 1,
             "scoreDisplayMode": "informative",
             "details": {
@@ -30160,13 +30149,13 @@
             },
             {
               "startTime": 159,
-              "name": "lh:computed:TraceEngineResult:parse:Workers:finalize",
+              "name": "lh:computed:TraceEngineResult:parse:Warnings:finalize",
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 160,
-              "name": "lh:computed:TraceEngineResult:parse:Warnings:finalize",
+              "name": "lh:computed:TraceEngineResult:parse:Workers:finalize",
               "duration": 1,
               "entryType": "measure"
             },
@@ -31463,7 +31452,8 @@
               "audits[csp-xss].details.headings[0].label",
               "audits[has-hsts].details.headings[0].label",
               "audits[origin-isolation].details.headings[0].label",
-              "audits[clickjacking-mitigation].details.headings[0].label"
+              "audits[clickjacking-mitigation].details.headings[0].label",
+              "audits[trusted-types-xss].details.headings[0].label"
             ],
             "core/audits/server-response-time.js | title": [
               "audits[server-response-time].title"
@@ -32640,12 +32630,7 @@
               "audits[document-latency-insight].details.items.noRedirects.label"
             ],
             "node_modules/@paulirish/trace_engine/models/trace/insights/DocumentLatency.js | passingServerResponseTime": [
-              {
-                "values": {
-                  "PH1": "27 ms"
-                },
-                "path": "audits[document-latency-insight].details.items.serverResponseIsFast.label"
-              }
+              "audits[document-latency-insight].details.items.serverResponseIsFast.label"
             ],
             "node_modules/@paulirish/trace_engine/models/trace/insights/DocumentLatency.js | passingTextCompression": [
               "audits[document-latency-insight].details.items.usesCompression.label"
