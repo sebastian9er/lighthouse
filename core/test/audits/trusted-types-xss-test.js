@@ -121,7 +121,10 @@ it('Messed Trusted Types directive.', async () => {
       {
         url: 'https://example.com',
         responseHeaders: [
-          {name: 'Content-Security-Policy', value: `require-trusted-types-for; 'script' report-uri /cspreport`},
+          {
+            name: 'Content-Security-Policy',
+            value: `require-trusted-types-for; 'script' report-uri /cspreport`,
+          },
         ],
       },
     ]),
@@ -214,7 +217,7 @@ describe('getRawCsps', () => {
         },
       ]),
     };
-   const {cspHeaders, cspMetaTags} =
+    const {cspHeaders, cspMetaTags} =
       await TrustedTypesXss.getRawCsps(artifacts, {computedCache: new Map()});
     expect(cspHeaders).toEqual([]);
     expect(cspMetaTags).toEqual([]);
@@ -249,13 +252,15 @@ describe('getRawCsps', () => {
 
 describe('constructResults', () => {
   it('passes with no findings', () => {
-    const {score, results} = TrustedTypesXss.constructResults([`require-trusted-types-for 'script';report-uri /cspreport`], []);
+    const {score, results} = TrustedTypesXss.constructResults(
+        [`require-trusted-types-for 'script';report-uri /cspreport`], []);
     expect(score).toEqual(1);
     expect(results).toEqual([]);
   });
 
   it('passes with no findings in metatags', () => {
-    const {score, results} = TrustedTypesXss.constructResults([], [`require-trusted-types-for 'script';report-uri /cspreport`]);
+    const {score, results} = TrustedTypesXss.constructResults(
+        [], [`require-trusted-types-for 'script';report-uri /cspreport`]);
     expect(score).toEqual(1);
     expect(results).toEqual([]);
   });
@@ -266,7 +271,8 @@ describe('constructResults', () => {
     expect(score).toEqual(0);
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
-        .toBeDisplayString('No `Content-Security-Policy` header with Trusted Types directive found');
+        .toBeDisplayString(
+            'No `Content-Security-Policy` header with Trusted Types directive found');
   });
 
   it('returns single item for no CSP', () => {
@@ -274,6 +280,7 @@ describe('constructResults', () => {
     expect(score).toEqual(0);
     expect(results[0].severity).toBeDisplayString('High');
     expect(results[0].description)
-        .toBeDisplayString('No `Content-Security-Policy` header with Trusted Types directive found');
+        .toBeDisplayString(
+            'No `Content-Security-Policy` header with Trusted Types directive found');
   });
 });
