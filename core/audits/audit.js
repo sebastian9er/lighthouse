@@ -194,6 +194,21 @@ class Audit {
     };
   }
 
+  /**
+   * @param {LH.IcuMessage | string=} title
+   * @param {LH.IcuMessage | string=} description
+   * @param {LH.Audit.Details.ListableDetail} value
+   * @return {LH.Audit.Details.ListSectionItem}
+   */
+  static makeListDetailSectionItem(value, title, description) {
+    return {
+      type: 'list-section',
+      title,
+      description,
+      value,
+    };
+  }
+
   /** @typedef {{
    * content: string;
    * title: string;
