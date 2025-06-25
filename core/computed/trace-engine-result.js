@@ -34,7 +34,6 @@ class TraceEngineResult {
       lanternSettings.precomputedLanternData = settings.precomputedLanternData;
     }
 
-    // eslint-disable-next-line max-len
     await processor.parse(/** @type {import('@paulirish/trace_engine').Types.Events.Event[]} */ (
       traceEvents
     ), {
@@ -63,7 +62,7 @@ class TraceEngineResult {
     if (!processor.parsedTrace) throw new Error('No data');
     if (!processor.insights) throw new Error('No insights');
     this.localizeInsights(processor.insights);
-    return {data: processor.parsedTrace, insights: processor.insights};
+    return {parsedTrace: processor.parsedTrace, insights: processor.insights};
   }
 
   /**
@@ -97,6 +96,9 @@ class TraceEngineResult {
         if (value && typeof value === 'object' && '__i18nBytes' in value) {
           values[key] = value.__i18nBytes;
           // TODO: use an actual byte formatter. Right now, this shows the exact number of bytes.
+        } else if (value && typeof value === 'object' && '__i18nMillis' in value) {
+          values[key] = `${value.__i18nMillis} ms`;
+          // TODO: use an actual time formatter.
         } else if (value && typeof value === 'object' && 'i18nId' in value) {
           // TODO: add support for str_ values to be IcuMessage. For now, we translate it here.
           // This means that locale swapping won't work for this portion of the IcuMessage.
@@ -172,6 +174,10 @@ class TraceEngineResult {
             // @ts-expect-error
             values[key] = value.__i18nBytes;
             // TODO: use an actual byte formatter. Right now, this shows the exact number of bytes.
+          } else if (value && typeof value === 'object' && '__i18nMillis' in value) {
+            // @ts-expect-error
+            values[key] = `${value.__i18nMillis} ms`;
+            // TODO: use an actual time formatter.
           } else if (value && typeof value === 'object' && 'i18nId' in value) {
             // TODO: add support for str_ values to be IcuMessage.
             // @ts-expect-error

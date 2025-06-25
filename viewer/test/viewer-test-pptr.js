@@ -22,7 +22,6 @@ const {itIfProtoExists} = getProtoRoundTrip();
 const portNumber = 10200;
 const viewerUrl = `http://localhost:${portNumber}/dist/gh-pages/viewer/index.html`;
 const sampleLhr = LH_ROOT + '/core/test/results/sample_v2.json';
-// eslint-disable-next-line max-len
 const sampleFlowResult = LH_ROOT + '/core/test/fixtures/user-flows/reports/sample-flow-result.json';
 
 const lighthouseCategories = Object.keys(defaultConfig.categories);
@@ -30,7 +29,6 @@ const getAuditsOfCategory = category => defaultConfig.categories[category].audit
 
 // TODO: should be combined in some way with clients/test/extension/extension-test.js
 describe('Lighthouse Viewer', () => {
-  // eslint-disable-next-line no-console
   console.log('\n✨ Be sure to have recently run this: yarn build-viewer');
 
   /** @type {import('puppeteer').Browser} */

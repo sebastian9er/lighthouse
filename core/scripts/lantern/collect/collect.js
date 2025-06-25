@@ -123,7 +123,6 @@ async function runForWpt(url) {
 
   // Poll for the results every x seconds, where x = position in queue.
   let lhr;
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     const responseJson = await fetchString(jsonUrl);
     const response = JSON.parse(responseJson);
@@ -227,7 +226,6 @@ async function main() {
     let unthrottledDone = false;
 
     // The closure this makes is too convenient to decompose.
-    // eslint-disable-next-line no-inner-declarations
     function updateProgress() {
       const index = TEST_URLS.indexOf(url);
       log.progress([
