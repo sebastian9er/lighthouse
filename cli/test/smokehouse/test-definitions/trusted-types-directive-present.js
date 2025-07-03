@@ -12,7 +12,7 @@
 const expectations = {
   lhr: {
     requestedUrl: 'https://m.youtube.com/',
-    finalDisplayedUrl: 'https://www.youtube.com/?app=desktop',
+    finalDisplayedUrl: 'https://m.youtube.com/',
     audits: {
       'trusted-types-xss': {
         score: null,

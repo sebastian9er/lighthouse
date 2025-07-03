@@ -8999,33 +8999,25 @@
             },
             {
               "startTime": 347,
-<<<<<<< HEAD
               "name": "lh:audit:image-delivery-insight",
-=======
-              "name": "lh:audit:inp-breakdown-insight",
->>>>>>> main
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 348,
-<<<<<<< HEAD
-              "name": "lh:audit:interaction-to-next-paint-insight",
-=======
-              "name": "lh:audit:lcp-breakdown-insight",
->>>>>>> main
+              "name": "lh:audit:inp-breakdown-insight",
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 349,
-              "name": "lh:audit:lcp-discovery-insight",
+              "name": "lh:audit:lcp-breakdown-insight",
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 350,
-              "name": "lh:audit:lcp-phases-insight",
+              "name": "lh:audit:lcp-discovery-insight",
               "duration": 1,
               "entryType": "measure"
             },
@@ -31545,33 +31537,25 @@
             },
             {
               "startTime": 346,
-<<<<<<< HEAD
               "name": "lh:audit:image-delivery-insight",
-=======
-              "name": "lh:audit:inp-breakdown-insight",
->>>>>>> main
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 347,
-<<<<<<< HEAD
-              "name": "lh:audit:interaction-to-next-paint-insight",
-=======
-              "name": "lh:audit:lcp-breakdown-insight",
->>>>>>> main
+              "name": "lh:audit:inp-breakdown-insight",
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 348,
-              "name": "lh:audit:lcp-discovery-insight",
+              "name": "lh:audit:lcp-breakdown-insight",
               "duration": 1,
               "entryType": "measure"
             },
             {
               "startTime": 349,
-              "name": "lh:audit:lcp-phases-insight",
+              "name": "lh:audit:lcp-discovery-insight",
               "duration": 1,
               "entryType": "measure"
             },
