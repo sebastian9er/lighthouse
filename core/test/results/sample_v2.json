@@ -1,5 +1,5 @@
 {
-  "lighthouseVersion": "12.6.1",
+  "lighthouseVersion": "12.7.1",
   "requestedUrl": "http://localhost:10200/dobetterweb/dbw_tester.html",
   "mainDocumentUrl": "http://localhost:10200/dobetterweb/dbw_tester.html",
   "finalDisplayedUrl": "http://localhost:10200/dobetterweb/dbw_tester.html",
@@ -6141,7 +6141,7 @@
             "displayUnit": "duration"
           },
           {
-            "key": "wastedBytes",
+            "key": "totalBytes",
             "valueType": "bytes",
             "label": "Transfer Size",
             "displayUnit": "kb",
@@ -6152,101 +6152,121 @@
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-rotating.gif",
             "cacheLifetimeMs": 0,
+            "totalBytes": 934513,
             "wastedBytes": 934513
           },
           {
             "url": "http://localhost:10200/dobetterweb/third_party/aggressive-promise-polyfill.js",
             "cacheLifetimeMs": 0,
+            "totalBytes": 166576,
             "wastedBytes": 166576
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-1024x680.jpg?iar1",
             "cacheLifetimeMs": 0,
+            "totalBytes": 112939,
             "wastedBytes": 112939
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-1024x680.jpg?isr2",
             "cacheLifetimeMs": 0,
+            "totalBytes": 112939,
             "wastedBytes": 112939
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-1024x680.jpg?isr3",
             "cacheLifetimeMs": 0,
+            "totalBytes": 112939,
             "wastedBytes": 112939
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-1024x680.jpg",
             "cacheLifetimeMs": 0,
+            "totalBytes": 112939,
             "wastedBytes": 112939
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-1024x680.jpg?redirected-lcp",
             "cacheLifetimeMs": 0,
+            "totalBytes": 112939,
             "wastedBytes": 112939
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-1024x680.jpg?iar2",
             "cacheLifetimeMs": 0,
+            "totalBytes": 112939,
             "wastedBytes": 112939
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-480x318.jpg?isr1",
             "cacheLifetimeMs": 0,
+            "totalBytes": 24848,
             "wastedBytes": 24848
           },
           {
             "url": "http://localhost:10200/dobetterweb/lighthouse-480x318.jpg?async",
             "cacheLifetimeMs": 0,
+            "totalBytes": 24848,
             "wastedBytes": 24848
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_disabled.css?delay=200&isdisabled",
             "cacheLifetimeMs": 0,
+            "totalBytes": 700,
             "wastedBytes": 700
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_tester.css?delay=100",
             "cacheLifetimeMs": 0,
+            "totalBytes": 665,
             "wastedBytes": 665
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_tester.css?delay=2200",
             "cacheLifetimeMs": 0,
+            "totalBytes": 665,
             "wastedBytes": 665
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_tester.css?delay=3000&capped",
             "cacheLifetimeMs": 0,
+            "totalBytes": 665,
             "wastedBytes": 665
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_tester.css?delay=2000&async=true",
             "cacheLifetimeMs": 0,
+            "totalBytes": 665,
             "wastedBytes": 665
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_tester.css?delay=3000&async=true",
             "cacheLifetimeMs": 0,
+            "totalBytes": 665,
             "wastedBytes": 665
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_tester.css?scriptActivated&delay=200",
             "cacheLifetimeMs": 0,
+            "totalBytes": 665,
             "wastedBytes": 665
           },
           {
             "url": "http://localhost:10200/dobetterweb/dbw_tester.js",
             "cacheLifetimeMs": 0,
+            "totalBytes": 486,
             "wastedBytes": 486
           },
           {
             "url": "http://localhost:10200/dobetterweb/empty_module.js?delay=500",
             "cacheLifetimeMs": 0,
+            "totalBytes": 247,
             "wastedBytes": 247
           },
           {
             "url": "http://localhost:10200/dobetterweb/empty.css",
             "cacheLifetimeMs": 0,
+            "totalBytes": 233,
             "wastedBytes": 233
           }
         ],
@@ -6498,7 +6518,7 @@
     "forced-reflow-insight": {
       "id": "forced-reflow-insight",
       "title": "Forced reflow",
-      "description": "Many APIs, typically reading layout geometry, force the rendering engine to pause script execution in order to calculate the style and layout. Learn more about [forced reflow](https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing#avoid-forced-synchronous-layouts) and its mitigations.",
+      "description": "A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have been invalidated by a change to the DOM state. This can result in poor performance. Learn more about [forced reflows](https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing#avoid-forced-synchronous-layouts) and possible mitigations.",
       "score": 1,
       "scoreDisplayMode": "numeric",
       "details": {
@@ -6676,15 +6696,71 @@
         "uses-responsive-images"
       ]
     },
-    "interaction-to-next-paint-insight": {
-      "id": "interaction-to-next-paint-insight",
-      "title": "INP by phase",
-      "description": "Start investigating with the longest phase. [Delays can be minimized](https://web.dev/articles/optimize-inp#optimize_interactions). To reduce processing duration, [optimize the main-thread costs](https://web.dev/articles/optimize-long-tasks), often JS.",
+    "inp-breakdown-insight": {
+      "id": "inp-breakdown-insight",
+      "title": "INP breakdown",
+      "description": "Start investigating with the longest subpart. [Delays can be minimized](https://web.dev/articles/optimize-inp#optimize_interactions). To reduce processing duration, [optimize the main-thread costs](https://web.dev/articles/optimize-long-tasks), often JS.",
       "score": null,
       "scoreDisplayMode": "notApplicable",
       "guidanceLevel": 3,
       "replacesAudits": [
         "work-during-interaction"
+      ]
+    },
+    "lcp-breakdown-insight": {
+      "id": "lcp-breakdown-insight",
+      "title": "LCP breakdown",
+      "description": "Each [subpart has specific improvement strategies](https://web.dev/articles/optimize-lcp#lcp-breakdown). Ideally, most of the LCP time should be spent on loading the resources, not within delays.",
+      "score": 1,
+      "scoreDisplayMode": "informative",
+      "metricSavings": {
+        "LCP": 0
+      },
+      "details": {
+        "type": "list",
+        "items": [
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "label",
+                "valueType": "text",
+                "label": "Subpart"
+              },
+              {
+                "key": "duration",
+                "valueType": "ms",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "subpart": "timeToFirstByte",
+                "label": "Time to first byte",
+                "duration": 5.453
+              },
+              {
+                "subpart": "resourceLoadDelay",
+                "label": "Resource load delay",
+                "duration": 6783.663
+              },
+              {
+                "subpart": "resourceLoadDuration",
+                "label": "Resource load duration",
+                "duration": 4063.423
+              },
+              {
+                "subpart": "elementRenderDelay",
+                "label": "Element render delay",
+                "duration": 41.865
+              }
+            ]
+          }
+        ]
+      },
+      "guidanceLevel": 3,
+      "replacesAudits": [
+        "largest-contentful-paint-element"
       ]
     },
     "lcp-discovery-insight": {
@@ -6722,62 +6798,6 @@
       "replacesAudits": [
         "prioritize-lcp-image",
         "lcp-lazy-loaded"
-      ]
-    },
-    "lcp-phases-insight": {
-      "id": "lcp-phases-insight",
-      "title": "LCP by phase",
-      "description": "Each [phase has specific improvement strategies](https://web.dev/articles/optimize-lcp#lcp-breakdown). Ideally, most of the LCP time should be spent on loading the resources, not within delays.",
-      "score": 1,
-      "scoreDisplayMode": "informative",
-      "metricSavings": {
-        "LCP": 0
-      },
-      "details": {
-        "type": "list",
-        "items": [
-          {
-            "type": "table",
-            "headings": [
-              {
-                "key": "label",
-                "valueType": "text",
-                "label": "Phase"
-              },
-              {
-                "key": "duration",
-                "valueType": "ms",
-                "label": "Duration"
-              }
-            ],
-            "items": [
-              {
-                "phase": "timeToFirstByte",
-                "label": "Time to first byte",
-                "duration": 5.453
-              },
-              {
-                "phase": "resourceLoadDelay",
-                "label": "Resource load delay",
-                "duration": 6783.663
-              },
-              {
-                "phase": "resourceLoadDuration",
-                "label": "Resource load duration",
-                "duration": 4063.4230000000007
-              },
-              {
-                "phase": "elementRenderDelay",
-                "label": "Element render delay",
-                "duration": 41.86499999999978
-              }
-            ]
-          }
-        ]
-      },
-      "guidanceLevel": 3,
-      "replacesAudits": [
-        "largest-contentful-paint-element"
       ]
     },
     "legacy-javascript-insight": {
@@ -7242,17 +7262,17 @@
           "group": "hidden"
         },
         {
-          "id": "interaction-to-next-paint-insight",
+          "id": "inp-breakdown-insight",
+          "weight": 0,
+          "group": "hidden"
+        },
+        {
+          "id": "lcp-breakdown-insight",
           "weight": 0,
           "group": "hidden"
         },
         {
           "id": "lcp-discovery-insight",
-          "weight": 0,
-          "group": "hidden"
-        },
-        {
-          "id": "lcp-phases-insight",
           "weight": 0,
           "group": "hidden"
         },
@@ -9646,25 +9666,25 @@
       },
       {
         "startTime": 0,
+        "name": "lh:computed:TraceEngineResult:insights:INPBreakdown",
+        "duration": 100,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 0,
         "name": "lh:computed:TraceEngineResult:insights:ImageDelivery",
         "duration": 100,
         "entryType": "measure"
       },
       {
         "startTime": 0,
-        "name": "lh:computed:TraceEngineResult:insights:InteractionToNextPaint",
+        "name": "lh:computed:TraceEngineResult:insights:LCPBreakdown",
         "duration": 100,
         "entryType": "measure"
       },
       {
         "startTime": 0,
         "name": "lh:computed:TraceEngineResult:insights:LCPDiscovery",
-        "duration": 100,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 0,
-        "name": "lh:computed:TraceEngineResult:insights:LCPPhases",
         "duration": 100,
         "entryType": "measure"
       },
@@ -9760,25 +9780,25 @@
       },
       {
         "startTime": 0,
+        "name": "lh:computed:TraceEngineResult:insights:INPBreakdown",
+        "duration": 100,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 0,
         "name": "lh:computed:TraceEngineResult:insights:ImageDelivery",
         "duration": 100,
         "entryType": "measure"
       },
       {
         "startTime": 0,
-        "name": "lh:computed:TraceEngineResult:insights:InteractionToNextPaint",
+        "name": "lh:computed:TraceEngineResult:insights:LCPBreakdown",
         "duration": 100,
         "entryType": "measure"
       },
       {
         "startTime": 0,
         "name": "lh:computed:TraceEngineResult:insights:LCPDiscovery",
-        "duration": 100,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 0,
-        "name": "lh:computed:TraceEngineResult:insights:LCPPhases",
         "duration": 100,
         "entryType": "measure"
       },
@@ -10750,19 +10770,19 @@
       },
       {
         "startTime": 0,
-        "name": "lh:audit:interaction-to-next-paint-insight",
+        "name": "lh:audit:inp-breakdown-insight",
+        "duration": 100,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 0,
+        "name": "lh:audit:lcp-breakdown-insight",
         "duration": 100,
         "entryType": "measure"
       },
       {
         "startTime": 0,
         "name": "lh:audit:lcp-discovery-insight",
-        "duration": 100,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 0,
-        "name": "lh:audit:lcp-phases-insight",
         "duration": 100,
         "entryType": "measure"
       },
@@ -11133,7 +11153,7 @@
         "audits[user-timings].details.headings[3].label",
         "audits[long-tasks].details.headings[2].label",
         "audits[render-blocking-resources].details.headings[2].label",
-        "audits[lcp-phases-insight].details.items[0].headings[1].label",
+        "audits[lcp-breakdown-insight].details.items[0].headings[1].label",
         "audits[render-blocking-insight].details.headings[2].label"
       ],
       "core/audits/critical-request-chains.js | title": [
@@ -12478,11 +12498,32 @@
           "path": "audits[image-delivery-insight].details.items[6].subItems.items[0].reason"
         }
       ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/InteractionToNextPaint.js | title": [
-        "audits[interaction-to-next-paint-insight].title"
+      "node_modules/@paulirish/trace_engine/models/trace/insights/INPBreakdown.js | title": [
+        "audits[inp-breakdown-insight].title"
       ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/InteractionToNextPaint.js | description": [
-        "audits[interaction-to-next-paint-insight].description"
+      "node_modules/@paulirish/trace_engine/models/trace/insights/INPBreakdown.js | description": [
+        "audits[inp-breakdown-insight].description"
+      ],
+      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPBreakdown.js | title": [
+        "audits[lcp-breakdown-insight].title"
+      ],
+      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPBreakdown.js | description": [
+        "audits[lcp-breakdown-insight].description"
+      ],
+      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPBreakdown.js | subpart": [
+        "audits[lcp-breakdown-insight].details.items[0].headings[0].label"
+      ],
+      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPBreakdown.js | timeToFirstByte": [
+        "audits[lcp-breakdown-insight].details.items[0].items[0].label"
+      ],
+      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPBreakdown.js | resourceLoadDelay": [
+        "audits[lcp-breakdown-insight].details.items[0].items[1].label"
+      ],
+      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPBreakdown.js | resourceLoadDuration": [
+        "audits[lcp-breakdown-insight].details.items[0].items[2].label"
+      ],
+      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPBreakdown.js | elementRenderDelay": [
+        "audits[lcp-breakdown-insight].details.items[0].items[3].label"
       ],
       "node_modules/@paulirish/trace_engine/models/trace/insights/LCPDiscovery.js | title": [
         "audits[lcp-discovery-insight].title"
@@ -12498,27 +12539,6 @@
       ],
       "node_modules/@paulirish/trace_engine/models/trace/insights/LCPDiscovery.js | lazyLoadNotApplied": [
         "audits[lcp-discovery-insight].details.items[0].items.eagerlyLoaded.label"
-      ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPPhases.js | title": [
-        "audits[lcp-phases-insight].title"
-      ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPPhases.js | description": [
-        "audits[lcp-phases-insight].description"
-      ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPPhases.js | phase": [
-        "audits[lcp-phases-insight].details.items[0].headings[0].label"
-      ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPPhases.js | timeToFirstByte": [
-        "audits[lcp-phases-insight].details.items[0].items[0].label"
-      ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPPhases.js | resourceLoadDelay": [
-        "audits[lcp-phases-insight].details.items[0].items[1].label"
-      ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPPhases.js | resourceLoadDuration": [
-        "audits[lcp-phases-insight].details.items[0].items[2].label"
-      ],
-      "node_modules/@paulirish/trace_engine/models/trace/insights/LCPPhases.js | elementRenderDelay": [
-        "audits[lcp-phases-insight].details.items[0].items[3].label"
       ],
       "node_modules/@paulirish/trace_engine/models/trace/insights/LegacyJavaScript.js | title": [
         "audits[legacy-javascript-insight].title"
